@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  
+  --color-canvas: #F1F3F6;
+  --color-surface: #FFFFFF;
+  
+  --color-brand-yellow: #FFD643;
+  --color-brand-yellow-hover: #f5cb36;
+  --color-brand-dark: #1A1B2F;
+  --color-brand-dark-hover: #24253e;
+  
+  --color-text-main: #1F2232;
+  --color-text-muted: #8C90A4;
+  
+  --color-status-green: #49B86E;
+  --color-status-red: #EB5757;
+  --color-status-blue: #2D9CDB;
+  --color-status-orange: #F2994A;
+
+  --radius-2-5xl: 20px;
+  --radius-3-5xl: 28px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #F1F3F6;
+  color: #1F2232;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Smooth UI transitions */
+.transition-ui {
+  transition: all 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Custom scrollbar hiding */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
