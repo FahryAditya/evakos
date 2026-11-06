@@ -146,7 +146,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="space-y-6 max-w-3xl">
+  <div class="space-y-5 sm:space-y-6 max-w-3xl">
     <!-- Header -->
     <div class="flex items-center justify-between">
       <div>
@@ -154,7 +154,7 @@ const handleSubmit = async () => {
           <Icon name="lucide:arrow-left" class="w-3.5 h-3.5" />
           <span>Kembali ke Dashboard</span>
         </NuxtLink>
-        <h2 class="font-extrabold text-xl text-text-main tracking-tight">Edit Kamar: {{ form.name || 'Memuat...' }}</h2>
+        <h2 class="font-extrabold text-lg sm:text-xl text-text-main tracking-tight">Edit Kamar: {{ form.name || 'Memuat...' }}</h2>
       </div>
     </div>
 
@@ -164,19 +164,19 @@ const handleSubmit = async () => {
       <span>{{ errorMessage }}</span>
     </div>
 
-    <form @submit.prevent="handleSubmit" class="space-y-6">
+    <form @submit.prevent="handleSubmit" class="space-y-5 sm:space-y-6">
       <!-- Section 1: Informasi Dasar -->
-      <div class="bg-white rounded-2.5xl p-6 border border-slate-100 shadow-sm space-y-4">
+      <div class="bg-white rounded-2.5xl p-4 sm:p-6 border border-slate-100 shadow-xs space-y-4">
         <h3 class="font-bold text-sm text-text-main border-b border-slate-100 pb-2">Informasi Kamar</h3>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
           <div>
             <label class="block text-xs font-bold text-text-main mb-1.5">Nama Kamar</label>
             <input
               v-model="form.name"
               type="text"
               required
-              class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+              class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[42px]"
             />
           </div>
 
@@ -188,21 +188,21 @@ const handleSubmit = async () => {
               required
               min="0"
               step="50000"
-              class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+              class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[42px]"
             />
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-text-main mb-1.5">Status Ketersediaan</label>
-          <div class="flex items-center gap-4 text-xs font-semibold">
-            <label class="flex items-center gap-2 cursor-pointer">
+          <div class="flex flex-wrap items-center gap-4 text-xs font-semibold">
+            <label class="flex items-center gap-2 cursor-pointer bg-slate-50 px-3 py-2 rounded-xl border border-slate-100">
               <input type="radio" value="AVAILABLE" v-model="form.status" class="accent-brand-dark" />
-              <span class="text-status-green">Tersedia (Bisa Disewa)</span>
+              <span class="text-status-green font-bold">Tersedia (Bisa Disewa)</span>
             </label>
-            <label class="flex items-center gap-2 cursor-pointer">
+            <label class="flex items-center gap-2 cursor-pointer bg-slate-50 px-3 py-2 rounded-xl border border-slate-100">
               <input type="radio" value="RENTED" v-model="form.status" class="accent-brand-dark" />
-              <span class="text-status-red">Tersewa / Penuh</span>
+              <span class="text-status-red font-bold">Tersewa / Penuh</span>
             </label>
           </div>
         </div>
@@ -212,33 +212,33 @@ const handleSubmit = async () => {
           <textarea
             v-model="form.description"
             rows="3"
-            class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
           ></textarea>
         </div>
       </div>
 
       <!-- Section 2: Fasilitas Kamar -->
-      <div class="bg-white rounded-2.5xl p-6 border border-slate-100 shadow-sm space-y-4">
+      <div class="bg-white rounded-2.5xl p-4 sm:p-6 border border-slate-100 shadow-xs space-y-4">
         <h3 class="font-bold text-sm text-text-main border-b border-slate-100 pb-2">Fasilitas Kamar</h3>
         <p class="text-xs text-text-muted">Centang fasilitas yang tersedia di kamar ini:</p>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
           <button
             type="button"
             v-for="fac in commonFacilities"
             :key="fac"
             @click="toggleFacility(fac)"
             :class="[
-              'p-2.5 rounded-xl text-xs font-medium border text-left flex items-center justify-between transition-ui',
+              'p-2.5 rounded-xl text-xs font-medium border text-left flex items-center justify-between transition-ui min-h-[44px]',
               selectedFacilities.includes(fac)
                 ? 'bg-amber-50 border-amber-300 text-brand-dark font-bold'
                 : 'bg-white border-slate-200 text-text-muted hover:border-slate-300'
             ]"
           >
-            <span>{{ fac }}</span>
+            <span class="line-clamp-2">{{ fac }}</span>
             <Icon
               :name="selectedFacilities.includes(fac) ? 'lucide:check-circle-2' : 'lucide:circle'"
-              class="w-3.5 h-3.5 text-brand-dark flex-shrink-0"
+              class="w-3.5 h-3.5 text-brand-dark flex-shrink-0 ml-1"
             />
           </button>
         </div>
@@ -248,13 +248,13 @@ const handleSubmit = async () => {
             v-model="customFacility"
             type="text"
             placeholder="Tambah fasilitas khusus..."
-            class="flex-1 px-4 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:border-brand-yellow"
+            class="flex-1 px-3.5 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:outline-none focus:border-brand-yellow min-h-[40px]"
             @keydown.enter.prevent="addCustomFacility"
           />
           <button
             type="button"
             @click="addCustomFacility"
-            class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-text-main text-xs font-bold rounded-xl transition-ui"
+            class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-text-main text-xs font-bold rounded-xl transition-ui min-h-[40px] flex-shrink-0"
           >
             Tambah
           </button>
@@ -262,19 +262,22 @@ const handleSubmit = async () => {
       </div>
 
       <!-- Section 3: Foto-Foto Kamar -->
-      <div class="bg-white rounded-2.5xl p-6 border border-slate-100 shadow-sm space-y-4">
+      <div class="bg-white rounded-2.5xl p-4 sm:p-6 border border-slate-100 shadow-xs space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <h3 class="font-bold text-sm text-text-main">Galeri Foto Kamar</h3>
-          <span class="text-xs text-text-muted">{{ uploadedImages.length }} foto tersimpan</span>
+          <span class="text-xs text-text-muted font-bold">{{ uploadedImages.length }} foto tersimpan</span>
         </div>
 
-        <!-- Upload Dropzone -->
-        <label class="border-2 border-dashed border-slate-200 hover:border-brand-yellow rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer transition-ui bg-slate-50/50 hover:bg-amber-50/30">
-          <Icon v-if="!isUploading" name="lucide:upload-cloud" class="w-8 h-8 text-text-muted mb-2" />
-          <Icon v-else name="lucide:loader-2" class="w-8 h-8 text-brand-dark animate-spin mb-2" />
-          <p class="text-xs font-bold text-text-main">
-            {{ isUploading ? 'Sedang mengunggah foto baru...' : 'Klik untuk tambah foto baru dari HP/Laptop' }}
+        <!-- Upload Dropzone (Mobile & Desktop) -->
+        <label class="border-2 border-dashed border-slate-200 hover:border-brand-yellow rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-ui bg-slate-50/50 hover:bg-amber-50/30 text-center">
+          <div class="w-12 h-12 rounded-full bg-brand-yellow/30 text-brand-dark flex items-center justify-center mb-2">
+            <Icon v-if="!isUploading" name="lucide:camera" class="w-6 h-6" />
+            <Icon v-else name="lucide:loader-2" class="w-6 h-6 animate-spin" />
+          </div>
+          <p class="text-xs font-extrabold text-text-main">
+            {{ isUploading ? 'Sedang mengunggah foto baru...' : 'Ambil Foto dari Kamera HP atau Pilih dari File' }}
           </p>
+          <p class="text-[10px] text-text-muted mt-1">Bisa pilih beberapa foto sekaligus (JPG, PNG, WEBP)</p>
           <input
             type="file"
             multiple
@@ -286,7 +289,7 @@ const handleSubmit = async () => {
         </label>
 
         <!-- Preview Uploaded Images Grid -->
-        <div v-if="uploadedImages.length > 0" class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+        <div v-if="uploadedImages.length > 0" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2">
           <div
             v-for="(img, idx) in uploadedImages"
             :key="idx"
@@ -295,16 +298,17 @@ const handleSubmit = async () => {
             <img :src="img" class="w-full h-full object-cover" />
             <span
               v-if="idx === 0"
-              class="absolute top-1 left-1 bg-brand-yellow text-brand-dark text-[9px] font-bold px-1.5 py-0.5 rounded shadow-sm"
+              class="absolute top-1 left-1 bg-brand-yellow text-brand-dark text-[9px] font-bold px-1.5 py-0.5 rounded shadow-xs"
             >
               Foto Utama
             </span>
-            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-ui flex items-center justify-center gap-2">
+            <!-- Action overlay (Touch & Hover Friendly) -->
+            <div class="absolute inset-0 bg-black/50 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-ui flex items-center justify-center gap-2">
               <button
                 v-if="idx !== 0"
                 type="button"
                 @click="setPrimaryImage(idx)"
-                class="bg-white text-brand-dark p-1 rounded-md text-[10px] font-bold"
+                class="bg-white text-brand-dark px-2 py-1 rounded-md text-[10px] font-bold shadow-xs active:scale-95"
                 title="Jadikan Foto Utama"
               >
                 Utama
@@ -312,7 +316,7 @@ const handleSubmit = async () => {
               <button
                 type="button"
                 @click="removeImage(idx)"
-                class="bg-red-500 text-white p-1 rounded-md"
+                class="bg-red-500 text-white p-1.5 rounded-md shadow-xs active:scale-95"
                 title="Hapus Foto"
               >
                 <Icon name="lucide:trash" class="w-3.5 h-3.5" />
@@ -323,17 +327,17 @@ const handleSubmit = async () => {
       </div>
 
       <!-- Submit Buttons -->
-      <div class="flex items-center justify-end gap-3 pt-4">
+      <div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-2.5 sm:gap-3 pt-2">
         <NuxtLink
           to="/admin"
-          class="px-5 py-2.5 rounded-xl border border-slate-200 text-text-muted hover:text-text-main text-xs font-bold transition-ui"
+          class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-200 text-text-muted hover:text-text-main text-xs font-bold transition-ui min-h-[44px] flex items-center justify-center"
         >
           Batal
         </NuxtLink>
         <button
           type="submit"
           :disabled="isSubmitting || isUploading"
-          class="bg-brand-dark hover:bg-brand-dark-hover text-white px-6 py-2.5 rounded-xl text-xs font-bold transition-ui flex items-center gap-2 shadow-md disabled:opacity-50 active:scale-95"
+          class="w-full sm:w-auto bg-brand-dark hover:bg-brand-dark-hover text-white px-6 py-3 rounded-xl text-xs font-bold transition-ui flex items-center justify-center gap-2 shadow-md disabled:opacity-50 active:scale-95 min-h-[44px]"
         >
           <Icon v-if="isSubmitting" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
           <span>{{ isSubmitting ? 'Menyimpan...' : 'Simpan Perubahan Kamar' }}</span>
@@ -342,4 +346,3 @@ const handleSubmit = async () => {
     </form>
   </div>
 </template>
-

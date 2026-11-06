@@ -27,20 +27,20 @@ const waLink = computed(() => {
 </script>
 
 <template>
-  <div class="max-w-[1100px] mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
+  <div class="max-w-[1100px] mx-auto px-3.5 sm:px-6 py-4 sm:py-8 space-y-6 sm:space-y-8 pb-24 sm:pb-8">
     <!-- Back to catalog button -->
     <div>
       <NuxtLink
         to="/"
-        class="inline-flex items-center gap-2 text-xs font-bold text-text-muted hover:text-text-main transition-ui bg-white px-4 py-2 rounded-full border border-slate-200/80 shadow-sm"
+        class="inline-flex items-center gap-2 text-xs font-bold text-text-muted hover:text-text-main transition-ui bg-white px-4 py-2.5 rounded-full border border-slate-200/80 shadow-xs"
       >
         <Icon name="lucide:arrow-left" class="w-4 h-4" />
-        <span>Kembali ke Semua Pilihan Kamar</span>
+        <span>Kembali ke Semua Kamar</span>
       </NuxtLink>
     </div>
 
     <!-- Error State -->
-    <div v-if="error || !room" class="text-center py-20 bg-white rounded-3.5xl border border-slate-100 p-8">
+    <div v-if="error || !room" class="text-center py-20 bg-white rounded-3xl sm:rounded-3.5xl border border-slate-100 p-8">
       <h2 class="text-lg font-bold text-text-main">Kamar Tidak Ditemukan</h2>
       <p class="text-xs text-text-muted mt-1">Kamar yang Anda cari mungkin telah dihapus atau tautan tidak valid.</p>
       <NuxtLink to="/" class="mt-4 inline-block bg-brand-dark text-white text-xs font-bold px-5 py-2.5 rounded-xl">
@@ -49,14 +49,14 @@ const waLink = computed(() => {
     </div>
 
     <!-- Room Detail Content -->
-    <div v-else class="space-y-8">
+    <div v-else class="space-y-6 sm:space-y-8">
       <!-- Title & Price Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-3.5xl p-6 sm:p-8 border border-slate-100 shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-white rounded-3xl sm:rounded-3.5xl p-5 sm:p-8 border border-slate-100 shadow-sm">
         <div>
           <div class="flex items-center gap-2 mb-2">
             <span
               :class="[
-                'text-xs font-extrabold px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5',
+                'text-[10px] sm:text-xs font-extrabold px-3 py-1 rounded-full shadow-xs flex items-center gap-1.5',
                 room.status === 'AVAILABLE'
                   ? 'bg-status-green text-white'
                   : 'bg-status-red text-white'
@@ -67,11 +67,11 @@ const waLink = computed(() => {
             </span>
             <span class="text-xs text-text-muted font-medium">&bull; {{ setting.kosName }}</span>
           </div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold text-text-main tracking-tight">{{ room.name }}</h1>
+          <h1 class="text-xl sm:text-3xl font-extrabold text-text-main tracking-tight">{{ room.name }}</h1>
         </div>
 
-        <div class="sm:text-right">
-          <p class="text-xs text-text-muted font-medium">Harga Sewa Bulanan</p>
+        <div class="sm:text-right pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+          <p class="text-[11px] sm:text-xs text-text-muted font-medium">Harga Sewa Bulanan</p>
           <p class="text-2xl sm:text-3xl font-extrabold text-brand-dark mt-0.5">
             {{ formatRupiah(room.price) }}
             <span class="text-xs font-normal text-text-muted">/ bulan</span>
@@ -80,9 +80,9 @@ const waLink = computed(() => {
       </div>
 
       <!-- Main Photo Gallery -->
-      <div class="bg-white rounded-3.5xl p-4 sm:p-6 border border-slate-100 shadow-sm space-y-4">
+      <div class="bg-white rounded-3xl sm:rounded-3.5xl p-3.5 sm:p-6 border border-slate-100 shadow-sm space-y-3 sm:space-y-4">
         <!-- Main Big Image Preview -->
-        <div class="w-full aspect-video rounded-2.5xl overflow-hidden bg-slate-100 shadow-inner">
+        <div class="w-full aspect-[4/3] sm:aspect-video rounded-2xl sm:rounded-2.5xl overflow-hidden bg-slate-100 shadow-inner">
           <img
             :src="room.images?.[activePhotoIndex]?.url || room.images?.[0]?.url || 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1200'"
             :alt="room.name"
@@ -91,13 +91,13 @@ const waLink = computed(() => {
         </div>
 
         <!-- Thumbnails Gallery -->
-        <div v-if="room.images && room.images.length > 1" class="flex items-center gap-3 overflow-x-auto pb-2 no-scrollbar">
+        <div v-if="room.images && room.images.length > 1" class="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 no-scrollbar">
           <button
             v-for="(img, idx) in room.images"
             :key="img.id || idx"
             @click="activePhotoIndex = Number(idx)"
             :class="[
-              'w-24 sm:w-28 h-16 sm:h-20 rounded-2xl overflow-hidden flex-shrink-0 border-2 transition-ui',
+              'w-20 sm:w-28 h-14 sm:h-20 rounded-xl sm:rounded-2xl overflow-hidden flex-shrink-0 border-2 transition-ui',
               activePhotoIndex === Number(idx) ? 'border-brand-yellow scale-105 shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
             ]"
           >
@@ -107,28 +107,28 @@ const waLink = computed(() => {
       </div>
 
       <!-- Two-Column Information & CTA -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
         <!-- Left: Description & Facilities (2 cols) -->
         <div class="lg:col-span-2 space-y-6">
           <!-- Facilities Card -->
-          <div class="bg-white rounded-3.5xl p-6 sm:p-8 border border-slate-100 shadow-sm space-y-4">
+          <div class="bg-white rounded-3xl sm:rounded-3.5xl p-5 sm:p-8 border border-slate-100 shadow-sm space-y-4">
             <h2 class="text-base font-bold text-text-main border-b border-slate-100 pb-3">Fasilitas Kamar Ini</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
               <div
                 v-for="fac in room.facilities"
                 :key="fac"
-                class="flex items-center gap-2.5 bg-slate-50 p-3 rounded-2xl border border-slate-100"
+                class="flex items-center gap-2 bg-slate-50 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-slate-100"
               >
                 <div class="w-6 h-6 rounded-lg bg-amber-50 text-brand-dark flex items-center justify-center flex-shrink-0">
                   <Icon name="lucide:check" class="w-3.5 h-3.5 text-status-green" />
                 </div>
-                <span class="text-xs font-semibold text-text-main">{{ fac }}</span>
+                <span class="text-xs font-semibold text-text-main line-clamp-1">{{ fac }}</span>
               </div>
             </div>
           </div>
 
           <!-- Description Card -->
-          <div class="bg-white rounded-3.5xl p-6 sm:p-8 border border-slate-100 shadow-sm space-y-4">
+          <div class="bg-white rounded-3xl sm:rounded-3.5xl p-5 sm:p-8 border border-slate-100 shadow-sm space-y-4">
             <h2 class="text-base font-bold text-text-main border-b border-slate-100 pb-3">Deskripsi Lengkap</h2>
             <p class="text-xs sm:text-sm text-text-main/80 leading-relaxed whitespace-pre-line">
               {{ room.description || 'Tidak ada catatan deskripsi tambahan untuk kamar ini.' }}
@@ -136,8 +136,8 @@ const waLink = computed(() => {
           </div>
         </div>
 
-        <!-- Right: Booking / WhatsApp Card (1 col) -->
-        <div class="space-y-6">
+        <!-- Right: Desktop Booking / WhatsApp Card (Hidden on mobile, replaced by sticky bottom bar) -->
+        <div class="hidden lg:block space-y-6">
           <div class="bg-brand-dark text-white rounded-3.5xl p-6 sm:p-7 shadow-2xl space-y-5 sticky top-24">
             <div>
               <span class="text-xs font-bold text-brand-yellow uppercase tracking-wider">Pemesanan &amp; Survey</span>
@@ -161,7 +161,7 @@ const waLink = computed(() => {
               :href="waLink"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark text-xs font-extrabold py-3.5 px-4 rounded-2xl transition-ui flex items-center justify-center gap-2.5 shadow-lg active:scale-95"
+              class="w-full bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark text-xs sm:text-sm font-extrabold py-3.5 px-4 rounded-2xl transition-ui flex items-center justify-center gap-2.5 shadow-lg active:scale-95 min-h-[44px]"
             >
               <Icon name="lucide:message-circle" class="w-5 h-5" />
               <span>Chat via WhatsApp Sekarang</span>
@@ -182,6 +182,29 @@ const waLink = computed(() => {
         </div>
       </div>
     </div>
+
+    <!-- ============================================== -->
+    <!-- STICKY MOBILE BOTTOM BAR FOR INSTANT BOOKING   -->
+    <!-- ============================================== -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 sm:p-4 flex items-center justify-between gap-3 shadow-2xl safe-area-inset-bottom">
+      <div>
+        <span class="text-[10px] text-text-muted font-bold block uppercase">Harga Sewa</span>
+        <p class="text-base font-extrabold text-brand-dark leading-tight">
+          {{ room ? formatRupiah(room.price) : 'Rp 0' }}
+          <span class="text-[10px] font-normal text-text-muted">/ bln</span>
+        </p>
+      </div>
+
+      <a
+        :href="waLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark text-xs font-extrabold py-2.5 px-4 rounded-xl transition-ui flex items-center gap-2 shadow-sm active:scale-95 flex-shrink-0 min-h-[42px]"
+      >
+        <Icon name="lucide:message-circle" class="w-4 h-4" />
+        <span>Chat WhatsApp</span>
+      </a>
+    </div>
+
   </div>
 </template>
-

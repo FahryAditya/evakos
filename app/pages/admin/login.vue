@@ -42,21 +42,21 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-canvas flex items-center justify-center p-4">
-    <div class="w-full max-w-md bg-white rounded-3.5xl p-8 sm:p-10 shadow-xl border border-slate-100">
+  <div class="min-h-screen bg-canvas flex items-center justify-center p-3.5 sm:p-6">
+    <div class="w-full max-w-md bg-white rounded-3xl sm:rounded-3.5xl p-6 sm:p-10 shadow-xl border border-slate-100">
       <!-- Logo Header -->
-      <div class="flex items-center justify-center gap-3 mb-8">
-        <div class="grid grid-cols-2 gap-1 w-7 h-7">
-          <span class="w-3 h-3 bg-brand-yellow rounded-sm"></span>
-          <span class="w-3 h-3 bg-brand-dark rounded-sm"></span>
-          <span class="w-3 h-3 bg-brand-dark rounded-sm"></span>
-          <span class="w-3 h-3 bg-brand-yellow rounded-sm"></span>
+      <div class="flex items-center justify-center gap-3 mb-6 sm:mb-8">
+        <div class="grid grid-cols-2 gap-1 w-6 h-6 sm:w-7 sm:h-7">
+          <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-brand-yellow rounded-xs sm:rounded-sm"></span>
+          <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-brand-dark rounded-xs sm:rounded-sm"></span>
+          <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-brand-dark rounded-xs sm:rounded-sm"></span>
+          <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-brand-yellow rounded-xs sm:rounded-sm"></span>
         </div>
-        <h1 class="font-extrabold text-xl text-text-main tracking-tight uppercase">EvaKos Admin</h1>
+        <h1 class="font-extrabold text-lg sm:text-xl text-text-main tracking-tight uppercase">EvaKos Admin</h1>
       </div>
 
       <div class="text-center mb-6">
-        <h2 class="text-xl font-bold text-text-main">Masuk ke Panel Pemilik</h2>
+        <h2 class="text-lg sm:text-xl font-bold text-text-main">Masuk ke Panel Pemilik</h2>
         <p class="text-xs text-text-muted mt-1">Kelola data kamar, foto, dan status ketersediaan</p>
       </div>
 
@@ -74,7 +74,7 @@ const handleLogin = async () => {
             type="email"
             required
             placeholder="villa@evakos.com"
-            class="w-full px-4 py-3 text-xs rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+            class="w-full px-4 py-3 text-xs rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[44px]"
           />
         </div>
 
@@ -85,14 +85,14 @@ const handleLogin = async () => {
             type="password"
             required
             placeholder="••••••••"
-            class="w-full px-4 py-3 text-xs rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+            class="w-full px-4 py-3 text-xs rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[44px]"
           />
         </div>
 
         <button
           type="submit"
           :disabled="isLoading"
-          class="w-full bg-brand-dark hover:bg-brand-dark-hover text-white font-bold py-3 px-4 rounded-2xl text-xs transition-ui flex items-center justify-center gap-2 shadow-md disabled:opacity-50 active:scale-95 mt-2"
+          class="w-full bg-brand-dark hover:bg-brand-dark-hover text-white font-bold py-3.5 px-4 rounded-2xl text-xs transition-ui flex items-center justify-center gap-2 shadow-md disabled:opacity-50 active:scale-95 mt-2 min-h-[44px]"
         >
           <Icon v-if="isLoading" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
           <span>{{ isLoading ? 'Memverifikasi...' : 'Masuk Sekarang' }}</span>
@@ -108,4 +108,3 @@ const handleLogin = async () => {
     </div>
   </div>
 </template>
-

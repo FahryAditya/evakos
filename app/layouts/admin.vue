@@ -6,8 +6,11 @@ const { triggerToast } = useToast()
 const { data: meRes } = await useFetch('/api/auth/me')
 const user = computed(() => meRes.value?.user || { name: 'Villa', email: 'villa@evakos.com' })
 
-const { data: adminRoomsRes, refresh: refreshRooms } = await useFetch('/api/admin/rooms')
+const { data: adminRoomsRes } = await useFetch('/api/admin/rooms')
 const stats = computed(() => adminRoomsRes.value?.stats || { total: 0, available: 0, rented: 0 })
+
+// Mobile drawer state
+const isMobileDrawerOpen = ref(false)
 
 const handleLogout = async () => {
   try {
@@ -32,14 +35,58 @@ const isActive = (path: string) => {
 </script>
 
 <template>
-  <div class="min-h-screen p-3 md:p-6 lg:p-8 flex items-center justify-center bg-canvas">
+  <div class="min-h-screen bg-canvas p-0 sm:p-4 md:p-6 lg:p-8 flex items-center justify-center">
     <!-- Main Dashboard Canvas Container (Adapted from Visual Reference) -->
-    <main class="w-full max-w-[1440px] bg-white rounded-[32px] shadow-2xl border border-slate-100 flex flex-col xl:flex-row relative min-h-[860px] overflow-hidden">
+    <main class="w-full max-w-[1440px] bg-white sm:rounded-[32px] sm:shadow-2xl sm:border border-slate-100 flex flex-col xl:flex-row relative min-h-screen sm:min-h-[860px] overflow-hidden">
       
       <!-- ============================================== -->
-      <!-- 1. LEFT SIDEBAR                                -->
+      <!-- MOBILE TOP BAR (Only visible on < xl)          -->
       <!-- ============================================== -->
-      <aside class="w-full xl:w-[250px] flex-shrink-0 bg-white border-b xl:border-b-0 xl:border-r border-slate-100 p-6 flex flex-col justify-between">
+      <header class="xl:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 px-4 py-3 flex items-center justify-between shadow-xs">
+        <!-- Logo -->
+        <NuxtLink to="/admin" class="flex items-center gap-2.5">
+          <div class="grid grid-cols-2 gap-1 w-5 h-5">
+            <span class="w-2 h-2 bg-brand-yellow rounded-xs"></span>
+            <span class="w-2 h-2 bg-brand-dark rounded-xs"></span>
+            <span class="w-2 h-2 bg-brand-dark rounded-xs"></span>
+            <span class="w-2 h-2 bg-brand-yellow rounded-xs"></span>
+          </div>
+          <div>
+            <span class="font-extrabold text-xs tracking-tight text-text-main uppercase leading-tight">EvaKos</span>
+            <span class="block text-[9px] font-bold text-text-muted uppercase leading-none">Admin</span>
+          </div>
+        </NuxtLink>
+
+        <!-- Right Quick Pill: Status & Profile Button -->
+        <div class="flex items-center gap-2">
+          <!-- Room Status Badges Mini -->
+          <div class="flex items-center gap-1.5 bg-slate-100/80 px-2.5 py-1 rounded-full text-[10px] font-bold">
+            <span class="text-status-green flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-status-green"></span>
+              {{ stats.available }} Kosong
+            </span>
+            <span class="text-slate-300">|</span>
+            <span class="text-status-red flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-status-red"></span>
+              {{ stats.rented }} Terisi
+            </span>
+          </div>
+
+          <!-- Profile Trigger Button -->
+          <button
+            @click="isMobileDrawerOpen = true"
+            class="w-8 h-8 rounded-full bg-brand-yellow/30 text-brand-dark flex items-center justify-center font-bold text-xs ring-2 ring-brand-yellow/40 active:scale-95 transition-ui"
+            aria-label="Buka Profil"
+          >
+            <Icon name="lucide:user" class="w-4 h-4 text-brand-dark" />
+          </button>
+        </div>
+      </header>
+
+      <!-- ============================================== -->
+      <!-- 1. LEFT SIDEBAR (Desktop Only: xl:flex)        -->
+      <!-- ============================================== -->
+      <aside class="hidden xl:flex w-[250px] flex-shrink-0 bg-white border-r border-slate-100 p-6 flex-col justify-between">
         <div>
           <!-- Logo -->
           <NuxtLink to="/admin" class="flex items-center gap-3 px-2 mb-8">
@@ -113,19 +160,19 @@ const isActive = (path: string) => {
       <!-- ============================================== -->
       <!-- 2. CENTER CONTENT HUB                          -->
       <!-- ============================================== -->
-      <section class="flex-1 p-6 lg:p-8 overflow-y-auto no-scrollbar space-y-6">
+      <section class="flex-1 p-4 sm:p-6 lg:p-8 pb-28 sm:pb-28 xl:pb-8 overflow-y-auto no-scrollbar space-y-6">
         <slot />
       </section>
 
       <!-- ============================================== -->
-      <!-- 3. RIGHT PROFILE & QUICK STATS RAIL            -->
+      <!-- 3. RIGHT PROFILE & QUICK STATS RAIL (Desktop)  -->
       <!-- ============================================== -->
-      <aside class="w-full xl:w-[280px] flex-shrink-0 bg-white border-t xl:border-t-0 xl:border-l border-slate-100 p-6 flex flex-col justify-between space-y-6">
+      <aside class="hidden xl:flex w-[280px] flex-shrink-0 bg-white border-l border-slate-100 p-6 flex-col justify-between space-y-6">
         <div>
           <!-- Profile Header -->
           <div class="flex items-center justify-between mb-4">
             <h3 class="font-bold text-sm text-text-main">Profil Pemilik</h3>
-            <NuxtLink to="/admin/pengaturan" class="text-text-muted hover:text-text-main transition-ui p-1 rounded-md hover:bg-slate-50">
+            <NuxtLink to="/admin/pengaturan" class="text-text-muted hover:text-text-main transition-ui p-1 rounded-md hover:bg-slate-50" title="Pengaturan">
               <Icon name="lucide:settings" class="w-4 h-4" />
             </NuxtLink>
           </div>
@@ -174,7 +221,149 @@ const isActive = (path: string) => {
         </div>
       </aside>
 
+      <!-- ============================================== -->
+      <!-- MOBILE BOTTOM NAVIGATION BAR (Fixed at Bottom) -->
+      <!-- ============================================== -->
+      <nav class="xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200/80 px-3 py-2 flex items-center justify-around shadow-2xl safe-area-inset-bottom">
+        <!-- Dashboard -->
+        <NuxtLink
+          to="/admin"
+          :class="[
+            'flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition-ui',
+            isActive('/admin') ? 'text-brand-dark font-extrabold' : 'text-text-muted hover:text-text-main'
+          ]"
+        >
+          <div :class="['p-1 rounded-lg transition-ui', isActive('/admin') ? 'bg-brand-yellow/30' : '']">
+            <Icon name="lucide:layout-grid" class="w-5 h-5" />
+          </div>
+          <span class="text-[10px]">Dashboard</span>
+        </NuxtLink>
+
+        <!-- Tambah Kamar (Center Floating Accent) -->
+        <NuxtLink
+          to="/admin/kamar/tambah"
+          class="flex flex-col items-center -mt-5 transition-ui group"
+        >
+          <div class="w-12 h-12 rounded-full bg-brand-yellow text-brand-dark shadow-lg ring-4 ring-white flex items-center justify-center active:scale-95 group-hover:scale-105 transition-ui">
+            <Icon name="lucide:plus" class="w-6 h-6 stroke-[2.5]" />
+          </div>
+          <span class="text-[10px] font-bold text-brand-dark mt-0.5">Tambah</span>
+        </NuxtLink>
+
+        <!-- Pengaturan -->
+        <NuxtLink
+          to="/admin/pengaturan"
+          :class="[
+            'flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition-ui',
+            isActive('/admin/pengaturan') ? 'text-brand-dark font-extrabold' : 'text-text-muted hover:text-text-main'
+          ]"
+        >
+          <div :class="['p-1 rounded-lg transition-ui', isActive('/admin/pengaturan') ? 'bg-brand-yellow/30' : '']">
+            <Icon name="lucide:settings" class="w-5 h-5" />
+          </div>
+          <span class="text-[10px]">Pengaturan</span>
+        </NuxtLink>
+
+        <!-- Web Publik -->
+        <NuxtLink
+          to="/"
+          target="_blank"
+          class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-text-muted hover:text-text-main transition-ui"
+        >
+          <div class="p-1 rounded-lg">
+            <Icon name="lucide:external-link" class="w-5 h-5" />
+          </div>
+          <span class="text-[10px]">Web Kos</span>
+        </NuxtLink>
+      </nav>
+
+      <!-- ============================================== -->
+      <!-- MOBILE PROFILE DRAWER / BOTTOM SHEET           -->
+      <!-- ============================================== -->
+      <Teleport to="body">
+        <div
+          v-if="isMobileDrawerOpen"
+          class="xl:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4"
+          @click.self="isMobileDrawerOpen = false"
+        >
+          <div class="w-full sm:max-w-md bg-white rounded-t-3.5xl sm:rounded-3.5xl p-6 shadow-2xl space-y-5 animate-in slide-in-from-bottom duration-300">
+            <!-- Drawer Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-full bg-brand-yellow/20 text-brand-dark flex items-center justify-center font-bold text-base ring-2 ring-brand-yellow/40">
+                  <Icon name="lucide:user" class="w-5 h-5 text-brand-dark" />
+                </div>
+                <div>
+                  <h3 class="font-extrabold text-sm text-text-main">{{ user.name }}</h3>
+                  <p class="text-[11px] text-text-muted">{{ user.email }}</p>
+                </div>
+              </div>
+              <button
+                @click="isMobileDrawerOpen = false"
+                class="w-8 h-8 rounded-full bg-slate-100 text-text-muted hover:text-text-main flex items-center justify-center transition-ui"
+              >
+                <Icon name="lucide:x" class="w-4 h-4" />
+              </button>
+            </div>
+
+            <!-- Stats Recap -->
+            <div class="bg-slate-50 rounded-2.5xl p-4 border border-slate-100 space-y-3">
+              <h4 class="font-bold text-xs text-text-main">Status Ringkas Kamar</h4>
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+                  <span class="block text-lg font-extrabold text-text-main">{{ stats.total }}</span>
+                  <span class="text-[9px] font-semibold text-text-muted uppercase">Total</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+                  <span class="block text-lg font-extrabold text-status-green">{{ stats.available }}</span>
+                  <span class="text-[9px] font-semibold text-text-muted uppercase">Tersedia</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+                  <span class="block text-lg font-extrabold text-status-red">{{ stats.rented }}</span>
+                  <span class="text-[9px] font-semibold text-text-muted uppercase">Tersewa</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Links -->
+            <div class="space-y-2">
+              <NuxtLink
+                to="/admin/pengaturan"
+                @click="isMobileDrawerOpen = false"
+                class="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xs font-bold text-text-main transition-ui"
+              >
+                <div class="flex items-center gap-2.5">
+                  <Icon name="lucide:settings" class="w-4 h-4 text-text-muted" />
+                  <span>Pengaturan Nomor WA &amp; Info Kos</span>
+                </div>
+                <Icon name="lucide:chevron-right" class="w-4 h-4 text-text-muted" />
+              </NuxtLink>
+
+              <NuxtLink
+                to="/"
+                target="_blank"
+                class="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xs font-bold text-text-main transition-ui"
+              >
+                <div class="flex items-center gap-2.5">
+                  <Icon name="lucide:external-link" class="w-4 h-4 text-text-muted" />
+                  <span>Kunjungi Halaman Publik</span>
+                </div>
+                <Icon name="lucide:chevron-right" class="w-4 h-4 text-text-muted" />
+              </NuxtLink>
+            </div>
+
+            <!-- Logout Button -->
+            <button
+              @click="handleLogout"
+              class="w-full bg-red-50 hover:bg-red-100 text-status-red text-xs font-bold py-3 rounded-2xl transition-ui flex items-center justify-center gap-2 active:scale-95"
+            >
+              <Icon name="lucide:log-out" class="w-4 h-4" />
+              <span>Keluar Sesi Admin</span>
+            </button>
+          </div>
+        </div>
+      </Teleport>
+
     </main>
   </div>
 </template>
-

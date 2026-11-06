@@ -54,13 +54,13 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="space-y-6 max-w-2xl">
+  <div class="space-y-5 sm:space-y-6 max-w-2xl">
     <div>
       <NuxtLink to="/admin" class="text-xs text-text-muted hover:text-text-main flex items-center gap-1 mb-1 transition-ui">
         <Icon name="lucide:arrow-left" class="w-3.5 h-3.5" />
         <span>Kembali ke Dashboard</span>
       </NuxtLink>
-      <h2 class="font-extrabold text-xl text-text-main tracking-tight">Pengaturan Kontak &amp; Profil Kos</h2>
+      <h2 class="font-extrabold text-lg sm:text-xl text-text-main tracking-tight">Pengaturan Kontak &amp; Profil Kos</h2>
       <p class="text-xs text-text-muted mt-1">Ubah nomor WhatsApp tujuan chat calon penyewa dan informasi kos Anda.</p>
     </div>
 
@@ -70,8 +70,8 @@ const handleSubmit = async () => {
       <span>{{ errorMessage }}</span>
     </div>
 
-    <form @submit.prevent="handleSubmit" class="bg-white rounded-2.5xl p-6 border border-slate-100 shadow-sm space-y-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <form @submit.prevent="handleSubmit" class="bg-white rounded-2.5xl p-4 sm:p-6 border border-slate-100 shadow-xs space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
         <div>
           <label class="block text-xs font-bold text-text-main mb-1.5">Nama Kos</label>
           <input
@@ -79,7 +79,7 @@ const handleSubmit = async () => {
             type="text"
             required
             placeholder="EvaKos"
-            class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[42px]"
           />
         </div>
 
@@ -90,7 +90,7 @@ const handleSubmit = async () => {
             type="text"
             required
             placeholder="Villa"
-            class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+            class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[42px]"
           />
         </div>
       </div>
@@ -106,12 +106,12 @@ const handleSubmit = async () => {
             type="text"
             required
             placeholder="Contoh: 081234567890 atau 6281234567890"
-            class="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+            class="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[42px]"
           />
           <Icon name="lucide:phone" class="w-4 h-4 text-emerald-600 absolute left-3.5 top-1/2 -translate-y-1/2" />
         </div>
         <p class="text-[10px] text-text-muted mt-1">
-          Bisa diawali angka 08 atau 62. Sistem akan otomatis menyesuaikan agar bisa langsung diklik oleh calon penyewa.
+          Bisa diawali angka 08 atau 62. Sistem otomatis mengarahkannya ke chat WhatsApp calon penyewa.
         </p>
       </div>
 
@@ -122,7 +122,7 @@ const handleSubmit = async () => {
           v-model="form.address"
           rows="2"
           placeholder="Jl. Merpati No. 18, Dekat Kampus..."
-          class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+          class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
         ></textarea>
       </div>
 
@@ -133,27 +133,27 @@ const handleSubmit = async () => {
           v-model="form.mapsUrl"
           type="url"
           placeholder="https://maps.google.com/..."
-          class="w-full px-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+          class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[42px]"
         />
       </div>
 
       <!-- Live WA Preview -->
-      <div class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100">
+      <div class="p-3.5 sm:p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100">
         <div class="flex items-center gap-2 mb-1.5">
           <Icon name="lucide:message-circle" class="w-4 h-4 text-emerald-700" />
           <h4 class="text-xs font-bold text-emerald-900">Simulasi Chat Calon Penyewa</h4>
         </div>
-        <p class="text-[11px] text-emerald-800 italic">
-          "Halo kak {{ form.ownerName || 'Villa' }}, saya lihat dari website tertarik dengan Kamar Tipe Deluxe di {{ form.kosName || 'EvaKos' }}. Apakah masih tersedia?"
+        <p class="text-[11px] text-emerald-800 italic leading-relaxed">
+          "Halo kak {{ form.ownerName || 'Villa' }}, saya lihat dari website tertarik dengan kamar di {{ form.kosName || 'EvaKos' }}. Apakah masih tersedia?"
         </p>
       </div>
 
       <!-- Submit button -->
-      <div class="pt-4 flex justify-end">
+      <div class="pt-2 flex justify-end">
         <button
           type="submit"
           :disabled="isSubmitting"
-          class="bg-brand-dark hover:bg-brand-dark-hover text-white px-6 py-2.5 rounded-xl text-xs font-bold transition-ui flex items-center gap-2 shadow-md disabled:opacity-50 active:scale-95"
+          class="w-full sm:w-auto bg-brand-dark hover:bg-brand-dark-hover text-white px-6 py-3 rounded-xl text-xs font-bold transition-ui flex items-center justify-center gap-2 shadow-md disabled:opacity-50 active:scale-95 min-h-[44px]"
         >
           <Icon v-if="isSubmitting" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
           <span>{{ isSubmitting ? 'Menyimpan...' : 'Simpan Pengaturan' }}</span>
@@ -162,4 +162,3 @@ const handleSubmit = async () => {
     </form>
   </div>
 </template>
-

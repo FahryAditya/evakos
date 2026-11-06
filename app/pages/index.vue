@@ -46,44 +46,44 @@ const getWhatsAppRoomLink = (room: any) => {
 </script>
 
 <template>
-  <div class="max-w-[1360px] mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-10 sm:space-y-12">
+  <div class="max-w-[1360px] mx-auto px-3.5 sm:px-6 py-4 sm:py-8 space-y-8 sm:space-y-12">
     
     <!-- ============================================== -->
     <!-- 1. HERO BANNER                                 -->
     <!-- ============================================== -->
-    <section class="bg-brand-dark text-white rounded-[32px] p-6 sm:p-10 lg:p-12 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+    <section class="bg-brand-dark text-white rounded-3xl sm:rounded-[32px] p-5 sm:p-10 lg:p-12 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
       <!-- Background subtle glow -->
-      <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-yellow/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -top-24 -right-24 w-72 sm:w-96 h-72 sm:h-96 bg-brand-yellow/15 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div class="max-w-xl space-y-4 text-center lg:text-left relative z-10">
-        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 px-3.5 py-1.5 rounded-full text-[11px] font-semibold text-brand-yellow">
+      <div class="max-w-xl space-y-3.5 sm:space-y-4 text-center lg:text-left relative z-10">
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-full text-[11px] font-semibold text-brand-yellow">
           <span class="w-2 h-2 rounded-full bg-brand-yellow animate-pulse"></span>
           <span>Kamar Kos Nyaman &bull; Dikelola Langsung</span>
         </div>
 
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
           Cari Kamar Kos Impian di <span class="text-brand-yellow">{{ setting.kosName }}</span>
         </h1>
 
-        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto lg:mx-0">
           Temukan pilihan kamar bersih, aman, fasilitas lengkap, dan terjangkau. Pilih kamar yang cocok dan langsung hubungi pemilik via WhatsApp tanpa perantara.
         </p>
 
-        <!-- Quick Stats Banner -->
-        <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-semibold">
-          <div class="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-xl">
-            <Icon name="lucide:map-pin" class="w-4 h-4 text-brand-yellow" />
-            <span>{{ setting.address || 'Pusat Kota' }}</span>
+        <!-- Quick Info Chips -->
+        <div class="pt-1 sm:pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-4 text-xs font-semibold">
+          <div class="flex items-center gap-2 bg-white/10 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl">
+            <Icon name="lucide:map-pin" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-yellow" />
+            <span class="text-[11px] sm:text-xs">{{ setting.address || 'Pusat Kota' }}</span>
           </div>
-          <div class="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-xl">
-            <Icon name="lucide:user-check" class="w-4 h-4 text-status-green" />
-            <span>Pemilik: kak {{ setting.ownerName }}</span>
+          <div class="flex items-center gap-2 bg-white/10 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl">
+            <Icon name="lucide:user-check" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-status-green" />
+            <span class="text-[11px] sm:text-xs">Pemilik: kak {{ setting.ownerName }}</span>
           </div>
         </div>
       </div>
 
-      <!-- Hero Visual Accent (Adapted from acuan Visual Card) -->
-      <div class="w-full lg:w-96 bg-white text-text-main rounded-2.5xl p-5 shadow-2xl relative z-10 space-y-3">
+      <!-- Hero Fast Contact Card -->
+      <div class="w-full lg:w-96 bg-white text-text-main rounded-2.5xl p-4 sm:p-5 shadow-2xl relative z-10 space-y-3">
         <div class="flex items-center justify-between">
           <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Fast Contact</span>
           <span class="inline-flex items-center gap-1 text-[11px] font-bold text-status-green bg-emerald-50 px-2 py-0.5 rounded-full">
@@ -92,13 +92,13 @@ const getWhatsAppRoomLink = (room: any) => {
           </span>
         </div>
         <p class="text-xs font-medium text-text-muted leading-relaxed">
-          Punya pertanyaan seputar ketersediaan kamar, survey lokasi, atau pembayaran sewa?
+          Punya pertanyaan seputar ketersediaan kamar, survey lokasi, atau sistem sewa?
         </p>
         <a
           :href="`https://wa.me/${setting.whatsapp}?text=${encodeURIComponent('Halo kak ' + setting.ownerName + ', saya ingin survey lokasi kos.')}`"
           target="_blank"
           rel="noopener noreferrer"
-          class="w-full bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark text-xs font-bold py-3 rounded-xl transition-ui flex items-center justify-center gap-2 shadow-sm active:scale-95"
+          class="w-full bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark text-xs sm:text-sm font-extrabold py-3 rounded-xl transition-ui flex items-center justify-center gap-2 shadow-sm active:scale-95 min-h-[44px]"
         >
           <Icon name="lucide:message-circle" class="w-4 h-4" />
           <span>Chat Pemilik via WhatsApp</span>
@@ -109,11 +109,11 @@ const getWhatsAppRoomLink = (room: any) => {
     <!-- ============================================== -->
     <!-- 2. KATALOG & FILTER KAMAR                      -->
     <!-- ============================================== -->
-    <section class="space-y-6">
+    <section class="space-y-5 sm:space-y-6">
       <!-- Section Title & Search -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 class="text-2xl font-bold text-text-main tracking-tight">Pilihan Kamar Tersedia</h2>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-text-main tracking-tight">Pilihan Kamar Tersedia</h2>
           <p class="text-xs text-text-muted mt-0.5">Pilih kamar yang sesuai dengan kebutuhan dan budget Anda</p>
         </div>
 
@@ -122,52 +122,59 @@ const getWhatsAppRoomLink = (room: any) => {
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="Cari kamar (contoh: AC, Deluxe)..."
-            class="w-full pl-9 pr-4 py-2 text-xs rounded-full border border-slate-200 bg-white placeholder-slate-400 text-text-main focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
+            placeholder="Cari kamar (contoh: AC, Mandi Dalam)..."
+            class="w-full pl-9 pr-4 py-2.5 sm:py-2 text-xs rounded-full border border-slate-200 bg-white placeholder-slate-400 text-text-main focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui"
           />
           <Icon name="lucide:search" class="w-3.5 h-3.5 text-text-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
         </div>
       </div>
 
-      <!-- Filter Sub-tabs (From Visual Reference) -->
-      <div class="flex items-center gap-6 text-xs border-b border-slate-200/80 pb-2">
+      <!-- Filter Sub-tabs (Horizontally scrollable with smooth touch on mobile) -->
+      <div class="flex items-center gap-2 sm:gap-3 text-xs border-b border-slate-200/80 pb-3 overflow-x-auto no-scrollbar whitespace-nowrap scroll-smooth">
         <button
           @click="activeFilter = 'all'"
           :class="[
-            'pb-2 transition-ui text-xs',
+            'px-3.5 py-1.5 rounded-full text-xs transition-ui font-semibold flex items-center gap-1.5 flex-shrink-0',
             activeFilter === 'all'
-              ? 'font-bold text-text-main border-b-2 border-text-main'
-              : 'font-medium text-text-muted hover:text-text-main'
+              ? 'bg-brand-dark text-white font-bold shadow-xs'
+              : 'bg-white text-text-muted hover:text-text-main border border-slate-200'
           ]"
         >
-          Semua Kamar ({{ rooms.length }})
+          <span>Semua Kamar</span>
+          <span class="text-[10px] opacity-75 font-normal">({{ rooms.length }})</span>
         </button>
+
         <button
           @click="activeFilter = 'AVAILABLE'"
           :class="[
-            'pb-2 transition-ui text-xs',
+            'px-3.5 py-1.5 rounded-full text-xs transition-ui font-semibold flex items-center gap-1.5 flex-shrink-0',
             activeFilter === 'AVAILABLE'
-              ? 'font-bold text-text-main border-b-2 border-text-main'
-              : 'font-medium text-text-muted hover:text-text-main'
+              ? 'bg-status-green text-white font-bold shadow-xs'
+              : 'bg-white text-text-muted hover:text-text-main border border-slate-200'
           ]"
         >
-          Kamar Kosong / Tersedia ({{ rooms.filter((r: any) => r.status === 'AVAILABLE').length }})
+          <span class="w-1.5 h-1.5 rounded-full bg-status-green" :class="activeFilter === 'AVAILABLE' ? 'bg-white' : ''"></span>
+          <span>Kamar Tersedia</span>
+          <span class="text-[10px] opacity-75 font-normal">({{ rooms.filter((r: any) => r.status === 'AVAILABLE').length }})</span>
         </button>
+
         <button
           @click="activeFilter = 'RENTED'"
           :class="[
-            'pb-2 transition-ui text-xs',
+            'px-3.5 py-1.5 rounded-full text-xs transition-ui font-semibold flex items-center gap-1.5 flex-shrink-0',
             activeFilter === 'RENTED'
-              ? 'font-bold text-text-main border-b-2 border-text-main'
-              : 'font-medium text-text-muted hover:text-text-main'
+              ? 'bg-status-red text-white font-bold shadow-xs'
+              : 'bg-white text-text-muted hover:text-text-main border border-slate-200'
           ]"
         >
-          Tersewa / Penuh ({{ rooms.filter((r: any) => r.status === 'RENTED').length }})
+          <span class="w-1.5 h-1.5 rounded-full bg-status-red" :class="activeFilter === 'RENTED' ? 'bg-white' : ''"></span>
+          <span>Tersewa / Penuh</span>
+          <span class="text-[10px] opacity-75 font-normal">({{ rooms.filter((r: any) => r.status === 'RENTED').length }})</span>
         </button>
       </div>
 
       <!-- Empty State -->
-      <div v-if="filteredRooms.length === 0" class="text-center py-20 bg-white rounded-2.5xl border border-slate-100 p-8">
+      <div v-if="filteredRooms.length === 0" class="text-center py-16 sm:py-20 bg-white rounded-3xl border border-slate-100 p-8">
         <div class="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-3 text-text-muted text-2xl">
           🏠
         </div>
@@ -176,17 +183,17 @@ const getWhatsAppRoomLink = (room: any) => {
       </div>
 
       <!-- Room Cards Grid -->
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         <article
           v-for="room in filteredRooms"
           :key="room.id"
-          class="bg-white rounded-2.5xl p-4 sm:p-5 border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-ui flex flex-col justify-between"
+          class="bg-white rounded-3xl p-4 sm:p-5 border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-ui flex flex-col justify-between"
         >
           <div>
             <!-- Image & Badges -->
             <div
               @click="openModal(room)"
-              class="relative w-full h-52 rounded-2xl overflow-hidden bg-slate-100 cursor-pointer group mb-4"
+              class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-100 cursor-pointer group mb-3.5"
             >
               <img
                 :src="room.images?.[0]?.url || 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800'"
@@ -195,61 +202,61 @@ const getWhatsAppRoomLink = (room: any) => {
               />
 
               <!-- Overlay Hover Prompt -->
-              <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-ui flex items-center justify-center">
-                <span class="bg-white/90 text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+              <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-ui flex items-center justify-center">
+                <span class="bg-white/95 text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
                   <Icon name="lucide:maximize-2" class="w-3.5 h-3.5" />
                   Lihat {{ room.images?.length || 1 }} Foto
                 </span>
               </div>
 
               <!-- Status Badge (Hijau = Tersedia / Merah = Tersewa) -->
-              <div class="absolute top-3 right-3">
+              <div class="absolute top-2.5 right-2.5">
                 <span
                   :class="[
-                    'text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md flex items-center gap-1.5',
+                    'text-[10px] sm:text-[11px] font-extrabold px-2.5 sm:px-3 py-1 rounded-full shadow-md flex items-center gap-1.5',
                     room.status === 'AVAILABLE'
                       ? 'bg-status-green text-white'
                       : 'bg-status-red text-white'
                   ]"
                 >
                   <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-                  {{ room.status === 'AVAILABLE' ? 'Tersedia' : 'Tersewa / Penuh' }}
+                  {{ room.status === 'AVAILABLE' ? 'Tersedia' : 'Tersewa' }}
                 </span>
               </div>
 
               <!-- Photo Count -->
-              <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white text-[10px] font-medium px-2.5 py-1 rounded-lg flex items-center gap-1">
+              <div class="absolute bottom-2.5 left-2.5 bg-black/60 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg flex items-center gap-1">
                 <Icon name="lucide:camera" class="w-3 h-3" />
                 <span>{{ room.images?.length || 0 }} Foto</span>
               </div>
             </div>
 
             <!-- Title & Price -->
-            <div class="mb-3">
+            <div class="mb-2.5">
               <h3 class="font-extrabold text-base text-text-main line-clamp-1">{{ room.name }}</h3>
-              <p class="text-sm font-extrabold text-brand-dark mt-1">
+              <p class="text-sm font-extrabold text-brand-dark mt-0.5">
                 {{ formatRupiah(room.price) }}
                 <span class="text-xs font-normal text-text-muted">/ bulan</span>
               </p>
             </div>
 
             <!-- Description -->
-            <p v-if="room.description" class="text-xs text-text-muted leading-relaxed line-clamp-2 mb-4">
+            <p v-if="room.description" class="text-xs text-text-muted leading-relaxed line-clamp-2 mb-3">
               {{ room.description }}
             </p>
 
             <!-- Facilities tags -->
-            <div class="flex flex-wrap gap-1.5 mb-5">
+            <div class="flex flex-wrap gap-1.5 mb-4">
               <span
-                v-for="fac in room.facilities.slice(0, 4)"
+                v-for="fac in room.facilities.slice(0, 3)"
                 :key="fac"
-                class="text-[11px] font-medium bg-slate-50 border border-slate-100 text-text-main px-2.5 py-1 rounded-lg flex items-center gap-1"
+                class="text-[10px] sm:text-[11px] font-medium bg-slate-50 border border-slate-100 text-text-main px-2 sm:px-2.5 py-1 rounded-lg flex items-center gap-1"
               >
                 <Icon name="lucide:check" class="w-3 h-3 text-status-green" />
                 {{ fac }}
               </span>
-              <span v-if="room.facilities.length > 4" class="text-[10px] text-text-muted font-medium self-center">
-                +{{ room.facilities.length - 4 }} lainnya
+              <span v-if="room.facilities.length > 3" class="text-[10px] text-text-muted font-medium self-center">
+                +{{ room.facilities.length - 3 }} lainnya
               </span>
             </div>
           </div>
@@ -262,7 +269,7 @@ const getWhatsAppRoomLink = (room: any) => {
               :href="getWhatsAppRoomLink(room)"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark text-xs font-bold py-2.5 rounded-xl transition-ui flex items-center justify-center gap-2 shadow-sm active:scale-95"
+              class="w-full bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark text-xs sm:text-sm font-extrabold py-3 sm:py-2.5 rounded-xl transition-ui flex items-center justify-center gap-2 shadow-xs active:scale-95 min-h-[44px]"
             >
               <Icon name="lucide:message-circle" class="w-4 h-4" />
               <span>Tanya Kamar Ini via WA</span>
@@ -274,10 +281,10 @@ const getWhatsAppRoomLink = (room: any) => {
               :href="`https://wa.me/${setting.whatsapp}?text=${encodeURIComponent('Halo kak ' + setting.ownerName + ', apakah kamar ' + room.name + ' ada antrian jika nanti kosong?')}`"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full bg-slate-100 hover:bg-slate-200 text-text-muted text-xs font-bold py-2.5 rounded-xl transition-ui flex items-center justify-center gap-2 active:scale-95"
+              class="w-full bg-slate-100 hover:bg-slate-200 text-text-muted text-xs font-bold py-3 sm:py-2.5 rounded-xl transition-ui flex items-center justify-center gap-2 active:scale-95 min-h-[44px]"
             >
               <Icon name="lucide:bell" class="w-4 h-4" />
-              <span>Kamar Tersewa (Kabari Jika Kosong)</span>
+              <span>Kamar Tersewa (Kabari Nanti)</span>
             </a>
 
             <!-- Detail link -->
@@ -293,35 +300,35 @@ const getWhatsAppRoomLink = (room: any) => {
     </section>
 
     <!-- ============================================== -->
-    <!-- 3. HIGHLIGHT FEATURE CARDS (From Visual Design)-->
+    <!-- 3. HIGHLIGHT FEATURE CARDS                     -->
     <!-- ============================================== -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-2">
       <!-- Dark Navy Contrast Card -->
-      <article class="bg-brand-dark text-white rounded-3.5xl p-6 sm:p-8 shadow-card flex flex-col justify-between">
+      <article class="bg-brand-dark text-white rounded-3xl sm:rounded-3.5xl p-5 sm:p-8 shadow-card flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-brand-yellow uppercase tracking-wider">Keamanan &amp; Kenyamanan</span>
             <Icon name="lucide:shield-check" class="w-5 h-5 text-brand-yellow" />
           </div>
-          <h3 class="text-xl font-bold tracking-tight mb-2">Hunian Aman, Bersih, dan Tenang</h3>
+          <h3 class="text-lg sm:text-xl font-bold tracking-tight mb-2">Hunian Aman, Bersih, dan Tenang</h3>
           <p class="text-xs text-slate-300 leading-relaxed mb-6">
             Setiap kamar dirawat secara berkala untuk menjaga kebersihan dan kenyamanan penghuni. Lingkungan aman dan ramah untuk belajar maupun beristirahat setelah beraktivitas.
           </p>
         </div>
         <div class="pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-slate-400">
-          <span>Akses 24 Jam &bull; Kunci Gerbang Mandiri</span>
+          <span>Akses 24 Jam &bull; Kunci Mandiri</span>
           <span class="text-white font-bold">{{ setting.kosName }}</span>
         </div>
       </article>
 
       <!-- Yellow Contrast Card -->
-      <article class="bg-brand-yellow text-brand-dark rounded-3.5xl p-6 sm:p-8 shadow-card flex flex-col justify-between">
+      <article class="bg-brand-yellow text-brand-dark rounded-3xl sm:rounded-3.5xl p-5 sm:p-8 shadow-card flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-extrabold uppercase tracking-wider text-brand-dark/70">Langsung ke Pemilik</span>
             <Icon name="lucide:badge-percent" class="w-5 h-5 text-brand-dark" />
           </div>
-          <h3 class="text-xl font-extrabold tracking-tight mb-2">Tanpa Biaya Admin &amp; Perantara</h3>
+          <h3 class="text-lg sm:text-xl font-extrabold tracking-tight mb-2">Tanpa Biaya Admin &amp; Perantara</h3>
           <p class="text-xs text-brand-dark/85 font-medium leading-relaxed mb-6">
             Komunikasi dan transaksi sewa kamar dilakukan langsung dengan kak {{ setting.ownerName }}. Dapatkan informasi harga paling transparan dan fleksibilitas jadwal survey.
           </p>
@@ -341,10 +348,10 @@ const getWhatsAppRoomLink = (room: any) => {
     <Teleport to="body">
       <div
         v-if="activeModalRoom"
-        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4"
         @click.self="closeModal"
       >
-        <div class="bg-white rounded-3.5xl w-full max-w-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+        <div class="bg-white rounded-t-3.5xl sm:rounded-3.5xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[90vh]">
           <!-- Modal Header -->
           <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
             <div>
@@ -353,7 +360,7 @@ const getWhatsAppRoomLink = (room: any) => {
             </div>
             <button
               @click="closeModal"
-              class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-text-main flex items-center justify-center transition-ui"
+              class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-text-main flex items-center justify-center transition-ui active:scale-95"
             >
               <Icon name="lucide:x" class="w-4 h-4" />
             </button>
@@ -375,7 +382,7 @@ const getWhatsAppRoomLink = (room: any) => {
                 :key="img.id || idx"
                 @click="activePhotoIndex = Number(idx)"
                 :class="[
-                  'w-20 h-14 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-ui',
+                  'w-16 sm:w-20 h-12 sm:h-14 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-ui',
                   activePhotoIndex === Number(idx) ? 'border-brand-yellow scale-105' : 'border-transparent opacity-60 hover:opacity-100'
                 ]"
               >
@@ -399,18 +406,18 @@ const getWhatsAppRoomLink = (room: any) => {
           </div>
 
           <!-- Modal Footer CTA -->
-          <div class="p-4 sm:p-5 bg-slate-50 border-t border-slate-100 flex items-center justify-between gap-4">
+          <div class="p-4 sm:p-5 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
             <NuxtLink
               :to="`/kamar/${activeModalRoom.slug}`"
-              class="text-xs font-bold text-text-muted hover:text-text-main"
+              class="text-xs font-bold text-text-muted hover:text-text-main text-center order-2 sm:order-1"
             >
-              Buka Halaman Detail Penuh
+              Buka Halaman Detail Penuh &rarr;
             </NuxtLink>
             <a
               :href="getWhatsAppRoomLink(activeModalRoom)"
               target="_blank"
               rel="noopener noreferrer"
-              class="bg-brand-dark hover:bg-brand-dark-hover text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-ui flex items-center gap-2 active:scale-95 shadow-sm"
+              class="w-full sm:w-auto bg-brand-dark hover:bg-brand-dark-hover text-white text-xs sm:text-sm font-bold px-5 py-3 rounded-xl transition-ui flex items-center justify-center gap-2 active:scale-95 shadow-sm order-1 sm:order-2 min-h-[44px]"
             >
               <Icon name="lucide:message-circle" class="w-4 h-4 text-brand-yellow" />
               <span>Hubungi via WhatsApp</span>
@@ -422,4 +429,3 @@ const getWhatsAppRoomLink = (room: any) => {
 
   </div>
 </template>
-
