@@ -214,9 +214,9 @@ const handleSubmit = async () => {
             :key="fac"
             @click="toggleFacility(fac)"
             :class="[
-              'p-2.5 rounded-xl text-xs font-medium border text-left flex items-center justify-between transition-ui min-h-[44px]',
+              'tab-spring p-2.5 rounded-xl text-xs font-medium border text-left flex items-center justify-between min-h-[44px] cursor-pointer active:scale-95',
               selectedFacilities.includes(fac)
-                ? 'bg-amber-50 border-amber-300 text-brand-dark font-bold'
+                ? 'bg-amber-50 border-amber-300 text-brand-dark font-bold shadow-xs'
                 : 'bg-white border-slate-200 text-text-muted hover:border-slate-300'
             ]"
           >
@@ -317,14 +317,14 @@ const handleSubmit = async () => {
       <div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-2.5 sm:gap-3 pt-2">
         <NuxtLink
           to="/admin"
-          class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-200 text-text-muted hover:text-text-main text-xs font-bold transition-ui min-h-[44px] flex items-center justify-center"
+          class="btn-spring w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-200 text-text-muted hover:text-text-main text-xs font-bold min-h-[44px] flex items-center justify-center"
         >
           Batal
         </NuxtLink>
         <button
           type="submit"
           :disabled="isSubmitting || isUploading"
-          class="w-full sm:w-auto bg-brand-dark hover:bg-brand-dark-hover text-white px-6 py-3 rounded-xl text-xs font-bold transition-ui flex items-center justify-center gap-2 shadow-md disabled:opacity-50 active:scale-95 min-h-[44px]"
+          class="btn-spring w-full sm:w-auto bg-brand-dark hover:bg-brand-dark-hover text-white px-6 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md disabled:opacity-50 min-h-[44px] cursor-pointer"
         >
           <Icon v-if="isSubmitting" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
           <span>{{ isSubmitting ? 'Menyimpan...' : 'Simpan & Publikasikan Kamar' }}</span>

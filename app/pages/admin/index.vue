@@ -79,7 +79,7 @@ const formatRupiah = (val: number) => {
 
         <NuxtLink
           to="/admin/kamar/tambah"
-          class="flex items-center gap-1.5 bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-ui shadow-xs active:scale-95 flex-shrink-0"
+          class="btn-spring flex items-center gap-1.5 bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold shadow-xs flex-shrink-0"
         >
           <Icon name="lucide:plus" class="w-4 h-4 stroke-[2.5]" />
           <span class="hidden xs:inline">Tambah Kamar</span>
@@ -91,7 +91,7 @@ const formatRupiah = (val: number) => {
     <!-- Quick Stat Cards (Mobile Optimized: 3 Columns) -->
     <div class="grid grid-cols-3 gap-2.5 sm:gap-4">
       <!-- Total Kamar -->
-      <div class="bg-white rounded-2xl sm:rounded-2.5xl p-3 sm:p-5 border border-slate-100 shadow-xs flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left">
+      <div class="card-interactive bg-white rounded-2xl sm:rounded-2.5xl p-3 sm:p-5 border border-slate-100 shadow-xs flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left">
         <div>
           <span class="text-[10px] sm:text-xs font-semibold text-text-muted">Total Kamar</span>
           <p class="text-xl sm:text-2xl font-extrabold text-text-main mt-0.5 sm:mt-1">{{ stats.total }}</p>
@@ -102,7 +102,7 @@ const formatRupiah = (val: number) => {
       </div>
 
       <!-- Kamar Tersedia -->
-      <div class="bg-emerald-50/70 rounded-2xl sm:rounded-2.5xl p-3 sm:p-5 border border-emerald-100 shadow-xs flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left">
+      <div class="card-interactive bg-emerald-50/70 rounded-2xl sm:rounded-2.5xl p-3 sm:p-5 border border-emerald-100 shadow-xs flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left">
         <div>
           <span class="text-[10px] sm:text-xs font-semibold text-emerald-800">Tersedia</span>
           <p class="text-xl sm:text-2xl font-extrabold text-status-green mt-0.5 sm:mt-1">{{ stats.available }}</p>
@@ -113,7 +113,7 @@ const formatRupiah = (val: number) => {
       </div>
 
       <!-- Kamar Tersewa -->
-      <div class="bg-red-50/70 rounded-2xl sm:rounded-2.5xl p-3 sm:p-5 border border-red-100 shadow-xs flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left">
+      <div class="card-interactive bg-red-50/70 rounded-2xl sm:rounded-2.5xl p-3 sm:p-5 border border-red-100 shadow-xs flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left">
         <div>
           <span class="text-[10px] sm:text-xs font-semibold text-red-800">Tersewa</span>
           <p class="text-xl sm:text-2xl font-extrabold text-status-red mt-0.5 sm:mt-1">{{ stats.rented }}</p>
@@ -129,9 +129,9 @@ const formatRupiah = (val: number) => {
       <button
         @click="selectedTab = 'all'"
         :class="[
-          'px-3 py-1.5 rounded-full transition-ui text-xs font-semibold flex items-center gap-1.5 flex-shrink-0',
+          'tab-spring px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 flex-shrink-0 cursor-pointer active:scale-95',
           selectedTab === 'all'
-            ? 'bg-brand-dark text-white font-bold'
+            ? 'bg-brand-dark text-white font-bold shadow-md'
             : 'bg-slate-100/70 text-text-muted hover:text-text-main'
         ]"
       >
@@ -142,9 +142,9 @@ const formatRupiah = (val: number) => {
       <button
         @click="selectedTab = 'AVAILABLE'"
         :class="[
-          'px-3 py-1.5 rounded-full transition-ui text-xs font-semibold flex items-center gap-1.5 flex-shrink-0',
+          'tab-spring px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 flex-shrink-0 cursor-pointer active:scale-95',
           selectedTab === 'AVAILABLE'
-            ? 'bg-status-green text-white font-bold'
+            ? 'bg-status-green text-white font-bold shadow-md'
             : 'bg-slate-100/70 text-text-muted hover:text-text-main'
         ]"
       >
@@ -156,9 +156,9 @@ const formatRupiah = (val: number) => {
       <button
         @click="selectedTab = 'RENTED'"
         :class="[
-          'px-3 py-1.5 rounded-full transition-ui text-xs font-semibold flex items-center gap-1.5 flex-shrink-0',
+          'tab-spring px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 flex-shrink-0 cursor-pointer active:scale-95',
           selectedTab === 'RENTED'
-            ? 'bg-status-red text-white font-bold'
+            ? 'bg-status-red text-white font-bold shadow-md'
             : 'bg-slate-100/70 text-text-muted hover:text-text-main'
         ]"
       >
@@ -169,8 +169,8 @@ const formatRupiah = (val: number) => {
     </div>
 
     <!-- Room Cards Grid -->
-    <div v-if="filteredRooms.length === 0" class="text-center py-16 bg-white rounded-2.5xl border border-slate-100 p-8">
-      <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-3 text-text-muted">
+    <div v-if="filteredRooms.length === 0" class="text-center py-16 bg-white rounded-2.5xl border border-slate-100 p-8 animate-fade-up">
+      <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-3 text-text-muted animate-bounce">
         <Icon name="lucide:inbox" class="w-6 h-6" />
       </div>
       <h3 class="text-sm font-bold text-text-main">Belum ada kamar yang cocok</h3>
@@ -181,15 +181,15 @@ const formatRupiah = (val: number) => {
       <div
         v-for="room in filteredRooms"
         :key="room.id"
-        class="bg-white rounded-2.5xl p-3.5 sm:p-4 border border-slate-100 shadow-xs hover:shadow-md transition-ui flex flex-col justify-between"
+        class="card-interactive bg-white rounded-2.5xl p-3.5 sm:p-4 border border-slate-100 shadow-xs hover:shadow-md flex flex-col justify-between group"
       >
         <div>
           <!-- Thumbnail Image & Status Badge -->
-          <div class="relative w-full h-40 sm:h-44 rounded-2xl overflow-hidden mb-3 bg-slate-100">
+          <div class="relative w-full h-40 sm:h-44 rounded-2xl overflow-hidden mb-3 bg-slate-100 shadow-inner">
             <img
               :src="room.images?.[0]?.url || 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500'"
               :alt="room.name"
-              class="w-full h-full object-cover"
+              class="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-[var(--ease-smooth)]"
             />
             <!-- Status Badge Floating -->
             <div class="absolute top-2.5 right-2.5">
@@ -201,7 +201,7 @@ const formatRupiah = (val: number) => {
                     : 'bg-status-red text-white'
                 ]"
               >
-                <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-white" :class="room.status === 'AVAILABLE' ? 'animate-pulse' : ''"></span>
                 {{ room.status === 'AVAILABLE' ? 'Tersedia' : 'Tersewa' }}
               </span>
             </div>
@@ -213,7 +213,7 @@ const formatRupiah = (val: number) => {
           </div>
 
           <!-- Room Info -->
-          <h3 class="font-bold text-sm text-text-main line-clamp-1">{{ room.name }}</h3>
+          <h3 class="font-bold text-sm text-text-main line-clamp-1 group-hover:text-brand-dark transition-colors">{{ room.name }}</h3>
           <p class="text-xs font-extrabold text-brand-dark mt-0.5">
             {{ formatRupiah(room.price) }} <span class="text-[10px] font-normal text-text-muted">/ bulan</span>
           </p>
@@ -235,11 +235,11 @@ const formatRupiah = (val: number) => {
 
         <!-- Action Bar: Fast Status Toggle & CRUD buttons -->
         <div class="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-          <!-- Fast Toggle 1-Click Button -->
+          <!-- Fast Toggle 1-Click Button with Spring Effect -->
           <button
             @click="toggleStatus(room)"
             :class="[
-              'text-[11px] font-bold px-3 py-2 rounded-xl transition-ui flex items-center gap-1.5 active:scale-95 min-h-[38px]',
+              'btn-spring text-[11px] font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 min-h-[38px] cursor-pointer',
               room.status === 'AVAILABLE'
                 ? 'bg-red-50 text-status-red hover:bg-red-100'
                 : 'bg-emerald-50 text-status-green hover:bg-emerald-100'

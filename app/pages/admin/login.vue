@@ -42,8 +42,8 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-canvas flex items-center justify-center p-3.5 sm:p-6">
-    <div class="w-full max-w-md bg-white rounded-3xl sm:rounded-3.5xl p-6 sm:p-10 shadow-xl border border-slate-100">
+  <div class="min-h-screen bg-canvas flex items-center justify-center p-3.5 sm:p-6 animate-fade-up">
+    <div class="card-interactive w-full max-w-md bg-white rounded-3xl sm:rounded-3.5xl p-6 sm:p-10 shadow-xl border border-slate-100">
       <!-- Logo Header -->
       <div class="flex items-center justify-center gap-3 mb-6 sm:mb-8">
         <div class="grid grid-cols-2 gap-1 w-6 h-6 sm:w-7 sm:h-7">
@@ -90,7 +90,7 @@ const handleLogin = async () => {
         <button
           type="submit"
           :disabled="isLoading"
-          class="w-full bg-brand-dark hover:bg-brand-dark-hover text-white font-bold py-3.5 px-4 rounded-2xl text-xs transition-ui flex items-center justify-center gap-2 shadow-md disabled:opacity-50 active:scale-95 mt-2 min-h-[44px]"
+          class="btn-spring w-full bg-brand-dark hover:bg-brand-dark-hover text-white font-bold py-3.5 px-4 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-md disabled:opacity-50 mt-2 min-h-[44px] cursor-pointer"
         >
           <Icon v-if="isLoading" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
           <span>{{ isLoading ? 'Memverifikasi...' : 'Masuk Sekarang' }}</span>

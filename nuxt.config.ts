@@ -7,6 +7,8 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxt/icon'],
   css: ['~/assets/css/main.css'],
   app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
       title: 'EvaKos - Informasi & Sewa Kamar Kos',
       meta: [

@@ -242,9 +242,9 @@ const isActive = (path: string) => {
         <!-- Tambah Kamar (Center Floating Accent) -->
         <NuxtLink
           to="/admin/kamar/tambah"
-          class="flex flex-col items-center -mt-5 transition-ui group"
+          class="flex flex-col items-center -mt-5 transition-transform duration-200 group active:scale-90"
         >
-          <div class="w-12 h-12 rounded-full bg-brand-yellow text-brand-dark shadow-lg ring-4 ring-white flex items-center justify-center active:scale-95 group-hover:scale-105 transition-ui">
+          <div class="w-12 h-12 rounded-full bg-brand-yellow text-brand-dark shadow-xl ring-4 ring-white flex items-center justify-center group-hover:scale-108 transition-transform duration-300 ease-[var(--ease-spring)] pulse-ring-yellow">
             <Icon name="lucide:plus" class="w-6 h-6 stroke-[2.5]" />
           </div>
           <span class="text-[10px] font-bold text-brand-dark mt-0.5">Tambah</span>
@@ -281,87 +281,89 @@ const isActive = (path: string) => {
       <!-- MOBILE PROFILE DRAWER / BOTTOM SHEET           -->
       <!-- ============================================== -->
       <Teleport to="body">
-        <div
-          v-if="isMobileDrawerOpen"
-          class="xl:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4"
-          @click.self="isMobileDrawerOpen = false"
-        >
-          <div class="w-full sm:max-w-md bg-white rounded-t-3.5xl sm:rounded-3.5xl p-6 shadow-2xl space-y-5 animate-in slide-in-from-bottom duration-300">
-            <!-- Drawer Header -->
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-full bg-brand-yellow/20 text-brand-dark flex items-center justify-center font-bold text-base ring-2 ring-brand-yellow/40">
-                  <Icon name="lucide:user" class="w-5 h-5 text-brand-dark" />
+        <Transition name="modal-fade">
+          <div
+            v-if="isMobileDrawerOpen"
+            class="xl:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4"
+            @click.self="isMobileDrawerOpen = false"
+          >
+            <div class="w-full sm:max-w-md bg-white rounded-t-3.5xl sm:rounded-3.5xl p-6 shadow-2xl space-y-5 animate-fade-up">
+              <!-- Drawer Header -->
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-full bg-brand-yellow/20 text-brand-dark flex items-center justify-center font-bold text-base ring-2 ring-brand-yellow/40">
+                    <Icon name="lucide:user" class="w-5 h-5 text-brand-dark" />
+                  </div>
+                  <div>
+                    <h3 class="font-extrabold text-sm text-text-main">{{ user.name }}</h3>
+                    <p class="text-[11px] text-text-muted">{{ user.email }}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 class="font-extrabold text-sm text-text-main">{{ user.name }}</h3>
-                  <p class="text-[11px] text-text-muted">{{ user.email }}</p>
+                <button
+                  @click="isMobileDrawerOpen = false"
+                  class="w-8 h-8 rounded-full bg-slate-100 text-text-muted hover:text-text-main flex items-center justify-center transition-transform duration-200 active:scale-90 hover:rotate-90 cursor-pointer"
+                >
+                  <Icon name="lucide:x" class="w-4 h-4" />
+                </button>
+              </div>
+
+              <!-- Stats Recap -->
+              <div class="bg-slate-50 rounded-2.5xl p-4 border border-slate-100 space-y-3">
+                <h4 class="font-bold text-xs text-text-main">Status Ringkas Kamar</h4>
+                <div class="grid grid-cols-3 gap-2 text-center">
+                  <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+                    <span class="block text-lg font-extrabold text-text-main">{{ stats.total }}</span>
+                    <span class="text-[9px] font-semibold text-text-muted uppercase">Total</span>
+                  </div>
+                  <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+                    <span class="block text-lg font-extrabold text-status-green">{{ stats.available }}</span>
+                    <span class="text-[9px] font-semibold text-text-muted uppercase">Tersedia</span>
+                  </div>
+                  <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
+                    <span class="block text-lg font-extrabold text-status-red">{{ stats.rented }}</span>
+                    <span class="text-[9px] font-semibold text-text-muted uppercase">Tersewa</span>
+                  </div>
                 </div>
               </div>
+
+              <!-- Quick Action Links -->
+              <div class="space-y-2">
+                <NuxtLink
+                  to="/admin/pengaturan"
+                  @click="isMobileDrawerOpen = false"
+                  class="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xs font-bold text-text-main transition-colors group active:scale-98"
+                >
+                  <div class="flex items-center gap-2.5">
+                    <Icon name="lucide:settings" class="w-4 h-4 text-text-muted group-hover:rotate-45 transition-transform duration-300" />
+                    <span>Pengaturan Nomor WA &amp; Info Kos</span>
+                  </div>
+                  <Icon name="lucide:chevron-right" class="w-4 h-4 text-text-muted group-hover:translate-x-1 transition-transform" />
+                </NuxtLink>
+
+                <NuxtLink
+                  to="/"
+                  target="_blank"
+                  class="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xs font-bold text-text-main transition-colors group active:scale-98"
+                >
+                  <div class="flex items-center gap-2.5">
+                    <Icon name="lucide:external-link" class="w-4 h-4 text-text-muted" />
+                    <span>Kunjungi Halaman Publik</span>
+                  </div>
+                  <Icon name="lucide:chevron-right" class="w-4 h-4 text-text-muted group-hover:translate-x-1 transition-transform" />
+                </NuxtLink>
+              </div>
+
+              <!-- Logout Button -->
               <button
-                @click="isMobileDrawerOpen = false"
-                class="w-8 h-8 rounded-full bg-slate-100 text-text-muted hover:text-text-main flex items-center justify-center transition-ui"
+                @click="handleLogout"
+                class="btn-spring w-full bg-red-50 hover:bg-red-100 text-status-red text-xs font-bold py-3 rounded-2xl flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Icon name="lucide:x" class="w-4 h-4" />
+                <Icon name="lucide:log-out" class="w-4 h-4" />
+                <span>Keluar Sesi Admin</span>
               </button>
             </div>
-
-            <!-- Stats Recap -->
-            <div class="bg-slate-50 rounded-2.5xl p-4 border border-slate-100 space-y-3">
-              <h4 class="font-bold text-xs text-text-main">Status Ringkas Kamar</h4>
-              <div class="grid grid-cols-3 gap-2 text-center">
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
-                  <span class="block text-lg font-extrabold text-text-main">{{ stats.total }}</span>
-                  <span class="text-[9px] font-semibold text-text-muted uppercase">Total</span>
-                </div>
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
-                  <span class="block text-lg font-extrabold text-status-green">{{ stats.available }}</span>
-                  <span class="text-[9px] font-semibold text-text-muted uppercase">Tersedia</span>
-                </div>
-                <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-xs">
-                  <span class="block text-lg font-extrabold text-status-red">{{ stats.rented }}</span>
-                  <span class="text-[9px] font-semibold text-text-muted uppercase">Tersewa</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Quick Action Links -->
-            <div class="space-y-2">
-              <NuxtLink
-                to="/admin/pengaturan"
-                @click="isMobileDrawerOpen = false"
-                class="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xs font-bold text-text-main transition-ui"
-              >
-                <div class="flex items-center gap-2.5">
-                  <Icon name="lucide:settings" class="w-4 h-4 text-text-muted" />
-                  <span>Pengaturan Nomor WA &amp; Info Kos</span>
-                </div>
-                <Icon name="lucide:chevron-right" class="w-4 h-4 text-text-muted" />
-              </NuxtLink>
-
-              <NuxtLink
-                to="/"
-                target="_blank"
-                class="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 text-xs font-bold text-text-main transition-ui"
-              >
-                <div class="flex items-center gap-2.5">
-                  <Icon name="lucide:external-link" class="w-4 h-4 text-text-muted" />
-                  <span>Kunjungi Halaman Publik</span>
-                </div>
-                <Icon name="lucide:chevron-right" class="w-4 h-4 text-text-muted" />
-              </NuxtLink>
-            </div>
-
-            <!-- Logout Button -->
-            <button
-              @click="handleLogout"
-              class="w-full bg-red-50 hover:bg-red-100 text-status-red text-xs font-bold py-3 rounded-2xl transition-ui flex items-center justify-center gap-2 active:scale-95"
-            >
-              <Icon name="lucide:log-out" class="w-4 h-4" />
-              <span>Keluar Sesi Admin</span>
-            </button>
           </div>
-        </div>
+        </Transition>
       </Teleport>
 
     </main>

@@ -30,9 +30,164 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Smooth UI transitions */
+/* ============================================== */
+/* 1. FLUID SPRING & SMOOTH TIMING TOKENS        */
+/* ============================================== */
+:root {
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Soft transition for all interactive components */
 .transition-ui {
-  transition: all 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 0.28s var(--ease-smooth);
+}
+
+.transition-spring {
+  transition: all 0.35s var(--ease-spring);
+}
+
+/* Card interactive 3D physics */
+.card-interactive {
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s ease, border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+.card-interactive:hover {
+  transform: translateY(-6px) scale(1.008);
+  box-shadow: 0 20px 35px -8px rgba(26, 27, 47, 0.12);
+  border-color: rgba(255, 214, 67, 0.45);
+}
+.card-interactive:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Spring button interactions */
+.btn-spring {
+  transition: transform 0.22s var(--ease-spring), background-color 0.2s ease, box-shadow 0.25s ease;
+  will-change: transform;
+}
+.btn-spring:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -6px rgba(26, 27, 47, 0.2);
+}
+.btn-spring:active {
+  transform: translateY(1px) scale(0.96);
+  box-shadow: 0 2px 6px -2px rgba(26, 27, 47, 0.1);
+}
+
+/* Tab indicator bounce */
+.tab-spring {
+  transition: all 0.3s var(--ease-spring);
+}
+
+/* ============================================== */
+/* 2. PAGE & LAYOUT TRANSITIONS                   */
+/* ============================================== */
+.page-enter-active,
+.page-leave-active,
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth);
+}
+.page-enter-from,
+.layout-enter-from {
+  opacity: 0;
+  transform: translateY(10px) scale(0.995);
+}
+.page-leave-to,
+.layout-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.995);
+}
+
+/* ============================================== */
+/* 3. FLUID MODAL & LIGHTBOX ANIMATIONS          */
+/* ============================================== */
+.modal-fade-enter-active {
+  transition: opacity 0.32s var(--ease-smooth);
+}
+.modal-fade-leave-active {
+  transition: opacity 0.22s ease-out;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-spring-enter-active {
+  transition: transform 0.4s var(--ease-spring), opacity 0.3s var(--ease-smooth);
+}
+.modal-spring-leave-active {
+  transition: transform 0.22s var(--ease-smooth), opacity 0.2s ease;
+}
+.modal-spring-enter-from {
+  opacity: 0;
+  transform: translateY(28px) scale(0.94);
+}
+.modal-spring-leave-to {
+  opacity: 0;
+  transform: translateY(18px) scale(0.97);
+}
+
+/* ============================================== */
+/* 4. KEYFRAME ANIMATIONS                         */
+/* ============================================== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+.animate-float {
+  animation: float 3.8s ease-in-out infinite;
+}
+
+@keyframes pulseRingYellow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 214, 67, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(255, 214, 67, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 214, 67, 0);
+  }
+}
+.pulse-ring-yellow {
+  animation: pulseRingYellow 2.4s var(--ease-fluid) infinite;
+}
+
+@keyframes pulseRingGreen {
+  0% {
+    box-shadow: 0 0 0 0 rgba(73, 184, 110, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(73, 184, 110, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(73, 184, 110, 0);
+  }
+}
+.pulse-ring-green {
+  animation: pulseRingGreen 2.4s var(--ease-fluid) infinite;
+}
+
+/* Stagger entrance utility */
+@keyframes enterFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: enterFadeUp 0.6s var(--ease-smooth) both;
 }
 
 /* Custom scrollbar hiding */

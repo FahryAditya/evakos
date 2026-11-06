@@ -153,7 +153,7 @@ const handleSubmit = async () => {
         <button
           type="submit"
           :disabled="isSubmitting"
-          class="w-full sm:w-auto bg-brand-dark hover:bg-brand-dark-hover text-white px-6 py-3 rounded-xl text-xs font-bold transition-ui flex items-center justify-center gap-2 shadow-md disabled:opacity-50 active:scale-95 min-h-[44px]"
+          class="btn-spring w-full sm:w-auto bg-brand-dark hover:bg-brand-dark-hover text-white px-6 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md disabled:opacity-50 min-h-[44px] cursor-pointer"
         >
           <Icon v-if="isSubmitting" name="lucide:loader-2" class="w-4 h-4 animate-spin" />
           <span>{{ isSubmitting ? 'Menyimpan...' : 'Simpan Pengaturan' }}</span>
