@@ -5,6 +5,7 @@ const setting = computed(() => settingsRes.value?.data || {
   ownerName: 'Villa',
   whatsapp: '6281234567890',
   address: 'Jl. Merpati No. 18, Pusat Kota',
+  mapsUrl: 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7',
 })
 
 const waLink = computed(() => {
@@ -80,6 +81,16 @@ const waLink = computed(() => {
       <div class="max-w-[1360px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
         <p>&copy; 2026 {{ setting.kosName }} &bull; Dikelola langsung oleh kak {{ setting.ownerName }}</p>
         <div class="flex items-center gap-4">
+          <a
+            :href="setting.mapsUrl || 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7'"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-text-main font-semibold flex items-center gap-1 transition-colors"
+          >
+            <Icon name="lucide:map-pin" class="w-3.5 h-3.5 text-brand-dark" />
+            <span>Lihat di Google Maps</span>
+          </a>
+          <span class="text-slate-300">&bull;</span>
           <NuxtLink to="/admin/login" class="hover:text-text-main font-semibold underline transition-colors">
             Login Pemilik Kos
           </NuxtLink>

@@ -8,6 +8,7 @@ const setting = computed(() => settingsRes.value?.data || {
   ownerName: 'Villa',
   whatsapp: '6281234567890',
   address: 'Jl. Merpati No. 18, Pusat Kota',
+  mapsUrl: 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7',
 })
 
 const { data: roomRes, error } = await useFetch(`/api/public/rooms/${slug}`)
@@ -68,6 +69,15 @@ const waLink = computed(() => {
             <span class="text-xs text-text-muted font-medium">&bull; {{ setting.kosName }}</span>
           </div>
           <h1 class="text-xl sm:text-3xl font-extrabold text-text-main tracking-tight">{{ room.name }}</h1>
+          <a
+            :href="setting.mapsUrl || 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7'"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-text-main font-semibold mt-1.5 transition-colors group"
+          >
+            <Icon name="lucide:map-pin" class="w-3.5 h-3.5 text-brand-dark group-hover:scale-110 transition-transform" />
+            <span>{{ setting.address || 'Pusat Kota' }} &bull; Buka di Google Maps &rarr;</span>
+          </a>
         </div>
 
         <div class="sm:text-right pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">

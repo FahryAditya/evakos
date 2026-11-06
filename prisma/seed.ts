@@ -46,7 +46,7 @@ async function main() {
       ownerName: 'Villa',
       whatsapp: '6281234567890',
       address: 'Jl. Merpati No. 18, Pusat Kota',
-      mapsUrl: 'https://maps.google.com',
+      mapsUrl: 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7',
     },
   })
   console.log('Setting seeded:', setting.kosName)

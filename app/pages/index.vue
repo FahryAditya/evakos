@@ -5,6 +5,7 @@ const setting = computed(() => settingsRes.value?.data || {
   ownerName: 'Villa',
   whatsapp: '6281234567890',
   address: 'Jl. Merpati No. 18, Pusat Kota',
+  mapsUrl: 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7',
 })
 
 const { data: roomsRes, pending } = await useFetch('/api/public/rooms')
@@ -72,10 +73,17 @@ const getWhatsAppRoomLink = (room: any) => {
 
         <!-- Quick Info Chips -->
         <div class="pt-1 sm:pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-4 text-xs font-semibold">
-          <div class="flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl transition-colors">
-            <Icon name="lucide:map-pin" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-yellow" />
+          <a
+            :href="setting.mapsUrl || 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7'"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 bg-white/10 hover:bg-white/20 hover:scale-102 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl transition-all duration-200 group active:scale-95 cursor-pointer"
+            title="Buka Lokasi di Google Maps"
+          >
+            <Icon name="lucide:map-pin" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-yellow group-hover:scale-110 transition-transform" />
             <span class="text-[11px] sm:text-xs">{{ setting.address || 'Pusat Kota' }}</span>
-          </div>
+            <Icon name="lucide:external-link" class="w-3 h-3 text-slate-300 opacity-60 group-hover:opacity-100 transition-opacity" />
+          </a>
           <div class="flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl transition-colors">
             <Icon name="lucide:user-check" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-status-green" />
             <span class="text-[11px] sm:text-xs">Pemilik: kak {{ setting.ownerName }}</span>
