@@ -12,7 +12,10 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Pilihan kamar kos nyaman, bersih, fasilitas lengkap, dan langsung terhubung dengan pemilik.' },
+        {
+          name: 'description',
+          content: 'Pilihan kamar kos nyaman, bersih, fasilitas lengkap, dan langsung terhubung dengan pemilik.',
+        },
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -24,7 +27,15 @@ export default defineNuxtConfig({
       ],
     },
   },
+  nitro: {
+    externals: {
+      traceInclude: ['node_modules/argon2/**'],
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['@vue/devtools-core', 'gsap'],
+    },
   },
 })
