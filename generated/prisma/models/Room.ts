@@ -326,10 +326,10 @@ export type RoomScalarWhereWithAggregatesInput = {
 
 export type RoomCreateInput = {
   id?: string
-  name: string
-  slug: string
-  price: number
-  description: string
+  name?: string
+  slug?: string
+  price?: number
+  description?: string
   facilities?: Prisma.RoomCreatefacilitiesInput | string[]
   status?: $Enums.RoomStatus
   order?: number
@@ -340,10 +340,10 @@ export type RoomCreateInput = {
 
 export type RoomUncheckedCreateInput = {
   id?: string
-  name: string
-  slug: string
-  price: number
-  description: string
+  name?: string
+  slug?: string
+  price?: number
+  description?: string
   facilities?: Prisma.RoomCreatefacilitiesInput | string[]
   status?: $Enums.RoomStatus
   order?: number
@@ -382,10 +382,10 @@ export type RoomUncheckedUpdateInput = {
 
 export type RoomCreateManyInput = {
   id?: string
-  name: string
-  slug: string
-  price: number
-  description: string
+  name?: string
+  slug?: string
+  price?: number
+  description?: string
   facilities?: Prisma.RoomCreatefacilitiesInput | string[]
   status?: $Enums.RoomStatus
   order?: number
@@ -516,10 +516,10 @@ export type RoomUpdateOneRequiredWithoutImagesNestedInput = {
 
 export type RoomCreateWithoutImagesInput = {
   id?: string
-  name: string
-  slug: string
-  price: number
-  description: string
+  name?: string
+  slug?: string
+  price?: number
+  description?: string
   facilities?: Prisma.RoomCreatefacilitiesInput | string[]
   status?: $Enums.RoomStatus
   order?: number
@@ -529,10 +529,10 @@ export type RoomCreateWithoutImagesInput = {
 
 export type RoomUncheckedCreateWithoutImagesInput = {
   id?: string
-  name: string
-  slug: string
-  price: number
-  description: string
+  name?: string
+  slug?: string
+  price?: number
+  description?: string
   facilities?: Prisma.RoomCreatefacilitiesInput | string[]
   status?: $Enums.RoomStatus
   order?: number

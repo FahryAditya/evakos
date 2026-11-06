@@ -11,7 +11,9 @@
 
 export const RoomStatus = {
   AVAILABLE: 'AVAILABLE',
-  RENTED: 'RENTED'
+  RENTED: 'RENTED',
+  RESERVED: 'RESERVED',
+  UNAVAILABLE: 'UNAVAILABLE'
 } as const
 
 export type RoomStatus = (typeof RoomStatus)[keyof typeof RoomStatus]

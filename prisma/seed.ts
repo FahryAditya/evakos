@@ -1,20 +1,33 @@
 import 'dotenv/config'
 import argon2 from 'argon2'
+import pg from 'pg'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '../generated/prisma/client'
 
+const { Pool } = pg
+
+const rawUrl = process.env.DATABASE_URL || ''
+const cleanUrl = rawUrl.replace(/[?&]sslmode=[^&]+/, '').replace(/[?&]pgbouncer=[^&]+/, '')
+
+const pool = new Pool({
+  connectionString: cleanUrl,
+  ssl: { rejectUnauthorized: false },
+})
+
 const prisma = new PrismaClient({
-  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
+  adapter: new PrismaPg(pool),
 })
 
 async function main() {
-  console.log('Seeding EvaKos database...')
+  console.log('Seeding EvaKos database in Supabase...')
 
   // 1. Seed Admin Villa
   const hashedPassword = await argon2.hash('admin123')
   const admin = await prisma.user.upsert({
     where: { email: 'villa@evakos.com' },
-    update: {},
+    update: {
+      password: hashedPassword,
+    },
     create: {
       email: 'villa@evakos.com',
       password: hashedPassword,
@@ -113,10 +126,10 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error(e)
+    console.error('Seed error:', e)
     process.exit(1)
   })
   .finally(async () => {
     await prisma.$disconnect()
+    await pool.end()
   })
-

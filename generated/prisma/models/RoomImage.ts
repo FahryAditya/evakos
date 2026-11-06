@@ -230,7 +230,7 @@ export type RoomImageScalarWhereWithAggregatesInput = {
 
 export type RoomImageCreateInput = {
   id?: string
-  url: string
+  url?: string
   isPrimary?: boolean
   createdAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutImagesInput
@@ -238,7 +238,7 @@ export type RoomImageCreateInput = {
 
 export type RoomImageUncheckedCreateInput = {
   id?: string
-  url: string
+  url?: string
   isPrimary?: boolean
   roomId: string
   createdAt?: Date | string
@@ -262,7 +262,7 @@ export type RoomImageUncheckedUpdateInput = {
 
 export type RoomImageCreateManyInput = {
   id?: string
-  url: string
+  url?: string
   isPrimary?: boolean
   roomId: string
   createdAt?: Date | string
@@ -365,14 +365,14 @@ export type BoolFieldUpdateOperationsInput = {
 
 export type RoomImageCreateWithoutRoomInput = {
   id?: string
-  url: string
+  url?: string
   isPrimary?: boolean
   createdAt?: Date | string
 }
 
 export type RoomImageUncheckedCreateWithoutRoomInput = {
   id?: string
-  url: string
+  url?: string
   isPrimary?: boolean
   createdAt?: Date | string
 }
@@ -416,7 +416,7 @@ export type RoomImageScalarWhereInput = {
 
 export type RoomImageCreateManyRoomInput = {
   id?: string
-  url: string
+  url?: string
   isPrimary?: boolean
   createdAt?: Date | string
 }
