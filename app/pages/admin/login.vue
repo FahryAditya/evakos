@@ -6,7 +6,7 @@ definePageMeta({
 const router = useRouter()
 const { triggerToast } = useToast()
 
-const email = ref('villa@evakos.com')
+const email = ref('')
 const password = ref('')
 const isLoading = ref(false)
 const errorMessage = ref('')
@@ -73,7 +73,6 @@ const handleLogin = async () => {
             v-model="email"
             type="email"
             required
-            placeholder="villa@evakos.com"
             class="w-full px-4 py-3 text-xs rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[44px]"
           />
         </div>
@@ -84,7 +83,6 @@ const handleLogin = async () => {
             v-model="password"
             type="password"
             required
-            placeholder="••••••••"
             class="w-full px-4 py-3 text-xs rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[44px]"
           />
         </div>
