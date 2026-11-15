@@ -26,6 +26,13 @@ export default defineEventHandler(async (event) => {
       })
     }
 
+    if (process.env.DATABASE_URL.includes('supabase')) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'DATABASE_URL di Vercel masih menggunakan Supabase lama yang nonaktif. Harap perbarui variabel DATABASE_URL di Vercel Dashboard ke Neon.',
+      })
+    }
+
     const user = await prisma.user.findUnique({
       where: { email: email.toLowerCase().trim() },
     })
@@ -63,7 +70,7 @@ export default defineEventHandler(async (event) => {
     console.error('Login Handler Error:', err)
 
     const rawMsg = String(err?.message || '')
-    let userFriendlyMessage = 'Terjadi kesalahan pada server saat login'
+    let userFriendlyMessage = err.statusMessage || 'Terjadi kesalahan pada server saat login'
 
     if (
       rawMsg.includes('tenant') ||
@@ -73,14 +80,18 @@ export default defineEventHandler(async (event) => {
       rawMsg.includes('Connection terminated')
     ) {
       userFriendlyMessage =
-        'Koneksi database Supabase tidak terhubung atau sedang dinonaktifkan (paused). Silakan aktifkan kembali proyek database Anda di Supabase Dashboard.'
+        'Koneksi database tidak terhubung atau sedang dinonaktifkan. Jika menggunakan Vercel, pastikan variabel DATABASE_URL di Vercel Dashboard sudah diganti ke Neon.'
     } else if (rawMsg.includes('password authentication failed')) {
-      userFriendlyMessage = 'Autentikasi database gagal. Periksa kredensial database di file .env.'
+      userFriendlyMessage = 'Autentikasi database gagal. Periksa kredensial database di Environment Variables.'
     }
 
     throw createError({
       statusCode: err.statusCode || 500,
       statusMessage: userFriendlyMessage,
+      data: {
+        message: userFriendlyMessage,
+        raw: process.env.NODE_ENV !== 'production' ? rawMsg : undefined,
+      },
     })
   }
 })

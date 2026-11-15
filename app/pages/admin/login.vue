@@ -34,7 +34,11 @@ const handleLogin = async () => {
       router.push('/admin')
     }
   } catch (err: any) {
-    errorMessage.value = err?.data?.statusMessage || err?.statusMessage || 'Gagal masuk. Periksa email & password.'
+    errorMessage.value =
+      err?.data?.message ||
+      err?.data?.statusMessage ||
+      err?.statusMessage ||
+      'Gagal masuk. Periksa email & password.'
   } finally {
     isLoading.value = false
   }
