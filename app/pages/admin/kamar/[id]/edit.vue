@@ -28,6 +28,22 @@ const isUploading = ref(false)
 const isSubmitting = ref(false)
 const errorMessage = ref('')
 
+const formatRupiah = (val: number) => {
+  return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val || 0)
+}
+
+const handlePriceKeyDown = (e: KeyboardEvent) => {
+  if (['e', 'E', '+', '-', '.', ','].includes(e.key)) {
+    e.preventDefault()
+  }
+}
+
+const handlePriceInput = (e: Event) => {
+  const target = e.target as HTMLInputElement
+  const clean = target.value.replace(/\D/g, '')
+  form.value.price = clean ? parseInt(clean, 10) : 0
+}
+
 const commonFacilities = [
   'AC',
   'Kamar Mandi Dalam',
@@ -181,15 +197,26 @@ const handleSubmit = async () => {
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-text-main mb-1.5">Harga Sewa per Bulan (Rp)</label>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-xs font-bold text-text-main">Harga Sewa per Bulan (Rp)</label>
+              <span v-if="form.price > 0" class="text-[11px] font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-100">
+                {{ formatRupiah(form.price) }} / bulan
+              </span>
+            </div>
             <input
-              v-model="form.price"
+              :value="form.price || ''"
+              @input="handlePriceInput"
+              @keydown="handlePriceKeyDown"
               type="number"
+              inputmode="numeric"
+              pattern="[0-9]*"
               required
               min="0"
-              step="50000"
+              step="any"
+              placeholder="Contoh: 850000"
               class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[42px]"
             />
+            <p class="text-[10px] text-text-muted mt-1">Hanya angka (tanpa titik atau koma). Bebas nominal berapa pun.</p>
           </div>
         </div>
 
