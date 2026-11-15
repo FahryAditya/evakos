@@ -45,11 +45,11 @@ async function runTests() {
   console.log('👉 [TEST 1] Pengujian Autentikasi Admin Villa...')
   try {
     const user = await prisma.user.findUnique({
-      where: { email: 'villa@evakos.com' },
+      where: { email: 'villakos112' },
     })
 
     if (!user) {
-      throw new Error('User villa@evakos.com tidak ditemukan di database!')
+      throw new Error('User villakos112 tidak ditemukan di database!')
     }
     console.log('   ✓ User ditemukan:', user.email, '| Name:', user.name)
 

@@ -27,12 +27,12 @@ async function main() {
   // 1. Seed Admin Villa
   const hashedPassword = await argon2.hash('admin123')
   const admin = await prisma.user.upsert({
-    where: { email: 'villa@evakos.com' },
+    where: { email: 'villakos112' },
     update: {
       password: hashedPassword,
     },
     create: {
-      email: 'villa@evakos.com',
+      email: 'villakos112',
       password: hashedPassword,
       name: 'Villa (Pemilik Kos)',
     },

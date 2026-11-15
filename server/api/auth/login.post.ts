@@ -1,7 +1,8 @@
 import { z } from 'zod'
 
 const loginSchema = z.object({
-  email: z.string().email('Format email tidak valid'),
+  email: z.string().optional(),
+  username: z.string().optional(),
   password: z.string().min(1, 'Password harus diisi'),
 })
 
@@ -17,7 +18,16 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const { email, password } = validation.data
+    const rawIdentifier = validation.data.username || validation.data.email || ''
+    if (!rawIdentifier.trim()) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Username atau email harus diisi',
+      })
+    }
+
+    const { password } = validation.data
+    const identifier = rawIdentifier.toLowerCase().trim()
 
     if (!process.env.DATABASE_URL) {
       throw createError({
@@ -33,14 +43,19 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: email.toLowerCase().trim() },
+    const user = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email: identifier },
+          { email: `${identifier}@evakos.com` },
+        ],
+      },
     })
 
     if (!user) {
       throw createError({
         statusCode: 401,
-        statusMessage: 'Email atau password salah',
+        statusMessage: 'Username atau password salah',
       })
     }
 
