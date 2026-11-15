@@ -77,7 +77,6 @@ const handleLogin = async () => {
             v-model="email"
             type="text"
             required
-            placeholder="Contoh: villaalexkos@gmail.com"
             class="w-full px-4 py-3 text-xs rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-yellow-100 transition-ui min-h-[44px]"
           />
         </div>
