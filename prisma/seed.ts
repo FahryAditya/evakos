@@ -7,7 +7,10 @@ import { PrismaClient } from '../generated/prisma/client'
 const { Pool } = pg
 
 const rawUrl = process.env.DATABASE_URL || ''
-const cleanUrl = rawUrl.replace(/[?&]sslmode=[^&]+/, '').replace(/[?&]pgbouncer=[^&]+/, '')
+const cleanUrl = rawUrl
+  .replace(/[?&]sslmode=[^&]+/, '')
+  .replace(/[?&]pgbouncer=[^&]+/, '')
+  .replace(/[?&]channel_binding=[^&]+/, '')
 
 const pool = new Pool({
   connectionString: cleanUrl,
@@ -39,14 +42,17 @@ async function main() {
   // 2. Seed Setting
   const setting = await prisma.setting.upsert({
     where: { id: 'default' },
-    update: {},
+    update: {
+      whatsapp: '6285924936849',
+      mapsUrl: 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8',
+    },
     create: {
       id: 'default',
       kosName: 'EvaKos Eksklusif',
       ownerName: 'Villa',
-      whatsapp: '6281234567890',
+      whatsapp: '6285924936849',
       address: 'Jl. Merpati No. 18, Pusat Kota',
-      mapsUrl: 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7',
+      mapsUrl: 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8',
     },
   })
   console.log('Setting seeded:', setting.kosName)

@@ -9,7 +9,10 @@ import { createSessionToken, verifySessionToken } from './server/utils/auth.js'
 const { Pool } = pg
 
 const rawUrl = process.env.DATABASE_URL || ''
-const cleanUrl = rawUrl.replace(/[?&]sslmode=[^&]+/, '').replace(/[?&]pgbouncer=[^&]+/, '')
+const cleanUrl = rawUrl
+  .replace(/[?&]sslmode=[^&]+/, '')
+  .replace(/[?&]pgbouncer=[^&]+/, '')
+  .replace(/[?&]channel_binding=[^&]+/, '')
 
 const pool = new Pool({
   connectionString: cleanUrl,

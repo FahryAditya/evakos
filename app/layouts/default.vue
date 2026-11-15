@@ -3,9 +3,9 @@ const { data: settingsRes } = await useFetch('/api/public/settings')
 const setting = computed(() => settingsRes.value?.data || {
   kosName: 'EvaKos',
   ownerName: 'Villa',
-  whatsapp: '6281234567890',
+  whatsapp: '6285924936849',
   address: 'Jl. Merpati No. 18, Pusat Kota',
-  mapsUrl: 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7',
+  mapsUrl: 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8',
 })
 
 const waLink = computed(() => {
@@ -82,7 +82,7 @@ const waLink = computed(() => {
         <p>&copy; 2026 {{ setting.kosName }} &bull; Dikelola langsung oleh kak {{ setting.ownerName }}</p>
         <div class="flex items-center gap-4">
           <a
-            :href="setting.mapsUrl || 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7'"
+            :href="setting.mapsUrl || 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8'"
             target="_blank"
             rel="noopener noreferrer"
             class="hover:text-text-main font-semibold flex items-center gap-1 transition-colors"

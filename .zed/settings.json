@@ -1,0 +1,75 @@
+{
+  // --- Mode Gelap & Tema ---
+  "theme": {
+    "mode": "dark",
+    "dark": "One Dark",
+    "light": "One Light",
+  },
+
+  // --- Icon Theme ---
+  "icon_theme": "Material Icon Theme",
+
+  // --- Title & Window (Antigravity Style) ---
+  "window_title_format": "Antigravity — ${projectName} — ${fileName}",
+  "window_title_separator": " — ",
+  "title_bar": {
+    "show_branch_status_icon": true,
+    "show_branch_name": true,
+    "show_worktree_name": true,
+    "show_project_items": true,
+    "show_onboarding_banner": false,
+    "show_user_picture": true,
+  },
+
+  // --- Editor & Indentasi (Nuxt 4 / Vue Standard) ---
+  "tab_size": 2,
+  "buffer_font_size": 14.5,
+  "buffer_line_height": {
+    "custom": 1.6,
+  },
+  "current_line_highlight": "all",
+  "cursor_blink": true,
+  "cursor_shape": "bar",
+  "show_whitespaces": "selection",
+
+  // --- Indent Guides (Mudah membaca template Vue bertingkat) ---
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+
+  // --- Panel File / Project Explorer ---
+  "project_panel": {
+    "dock": "left",
+    "indent_size": 20,
+    "entry_spacing": "comfortable",
+    "git_status": true,
+    "file_icons": true,
+    "folder_icons": true,
+  },
+
+  // --- Tabs ---
+  "tabs": {
+    "git_status": true,
+    "file_icons": true,
+    "close_position": "right",
+  },
+
+  // --- Gutter & Code Folds ---
+  "gutter": {
+    "line_numbers": true,
+    "code_actions": true,
+    "folds": true,
+  },
+
+  // --- Inlay Hints (TypeScript / Vue) ---
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+  },
+
+  // --- Otomatisasi & Format ---
+  "autosave": "on_focus_change",
+  "format_on_save": "on",
+}

@@ -23,9 +23,9 @@ watchEffect(() => {
     const s = settingsRes.value.data
     form.value.kosName = s.kosName || 'EvaKos'
     form.value.ownerName = s.ownerName || 'Villa'
-    form.value.whatsapp = s.whatsapp || '6281234567890'
+    form.value.whatsapp = s.whatsapp || '6285924936849'
     form.value.address = s.address || ''
-    form.value.mapsUrl = s.mapsUrl || ''
+    form.value.mapsUrl = s.mapsUrl || 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8'
   }
 })
 

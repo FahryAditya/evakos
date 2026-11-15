@@ -50,8 +50,8 @@ model Setting {
   id          String   @id @default("default")
   kosName     String   @default("EvaKos")
   ownerName   String   @default("Villa")
-  whatsapp    String   @default("6281234567890")
+  whatsapp    String   @default("6285924936849")
   address     String?  @db.Text
-  mapsUrl     String?  @db.Text
+  mapsUrl     String?  @default("https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8") @db.Text
   updatedAt   DateTime @updatedAt
 }

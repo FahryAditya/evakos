@@ -6,9 +6,9 @@ const { data: settingsRes } = await useFetch('/api/public/settings')
 const setting = computed(() => settingsRes.value?.data || {
   kosName: 'EvaKos',
   ownerName: 'Villa',
-  whatsapp: '6281234567890',
+  whatsapp: '6285924936849',
   address: 'Jl. Merpati No. 18, Pusat Kota',
-  mapsUrl: 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7',
+  mapsUrl: 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8',
 })
 
 const { data: roomRes, error } = await useFetch(`/api/public/rooms/${slug}`)
@@ -70,7 +70,7 @@ const waLink = computed(() => {
           </div>
           <h1 class="text-xl sm:text-3xl font-extrabold text-text-main tracking-tight">{{ room.name }}</h1>
           <a
-            :href="setting.mapsUrl || 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7'"
+            :href="setting.mapsUrl || 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8'"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-text-main font-semibold mt-1.5 transition-colors group"

@@ -7,22 +7,30 @@ export default defineEventHandler(async (event) => {
     whereClause.status = statusFilter
   }
 
-  const rooms = await prisma.room.findMany({
-    where: whereClause,
-    orderBy: [
-      { order: 'asc' },
-      { createdAt: 'desc' },
-    ],
-    include: {
-      images: {
-        orderBy: { isPrimary: 'desc' },
+  try {
+    const rooms = await prisma.room.findMany({
+      where: whereClause,
+      orderBy: [
+        { order: 'asc' },
+        { createdAt: 'desc' },
+      ],
+      include: {
+        images: {
+          orderBy: { isPrimary: 'desc' },
+        },
       },
-    },
-  })
+    })
 
-  return {
-    success: true,
-    data: rooms,
+    return {
+      success: true,
+      data: rooms,
+    }
+  } catch (err: any) {
+    console.warn('Database offline / returning empty rooms list:', err?.message)
+    return {
+      success: true,
+      data: [],
+    }
   }
 })
 

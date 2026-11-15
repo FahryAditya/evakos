@@ -3,9 +3,9 @@ const { data: settingsRes } = await useFetch('/api/public/settings')
 const setting = computed(() => settingsRes.value?.data || {
   kosName: 'EvaKos',
   ownerName: 'Villa',
-  whatsapp: '6281234567890',
+  whatsapp: '6285924936849',
   address: 'Jl. Merpati No. 18, Pusat Kota',
-  mapsUrl: 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7',
+  mapsUrl: 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8',
 })
 
 const { data: roomsRes, pending } = await useFetch('/api/public/rooms')
@@ -74,7 +74,7 @@ const getWhatsAppRoomLink = (room: any) => {
         <!-- Quick Info Chips -->
         <div class="pt-1 sm:pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-4 text-xs font-semibold">
           <a
-            :href="setting.mapsUrl || 'https://maps.app.goo.gl/2qX2Vv2UZ4xkrpsv7'"
+            :href="setting.mapsUrl || 'https://maps.app.goo.gl/PUPXZtA42mDLH2Hx8'"
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2 bg-white/10 hover:bg-white/20 hover:scale-102 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl transition-all duration-200 group active:scale-95 cursor-pointer"

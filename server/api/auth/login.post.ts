@@ -61,9 +61,26 @@ export default defineEventHandler(async (event) => {
       throw err
     }
     console.error('Login Handler Error:', err)
+
+    const rawMsg = String(err?.message || '')
+    let userFriendlyMessage = 'Terjadi kesalahan pada server saat login'
+
+    if (
+      rawMsg.includes('tenant') ||
+      rawMsg.includes('ENOTFOUND') ||
+      rawMsg.includes('XX000') ||
+      rawMsg.includes("Can't reach database server") ||
+      rawMsg.includes('Connection terminated')
+    ) {
+      userFriendlyMessage =
+        'Koneksi database Supabase tidak terhubung atau sedang dinonaktifkan (paused). Silakan aktifkan kembali proyek database Anda di Supabase Dashboard.'
+    } else if (rawMsg.includes('password authentication failed')) {
+      userFriendlyMessage = 'Autentikasi database gagal. Periksa kredensial database di file .env.'
+    }
+
     throw createError({
       statusCode: err.statusCode || 500,
-      statusMessage: err.statusMessage || err.message || 'Terjadi kesalahan pada server saat login',
+      statusMessage: userFriendlyMessage,
     })
   }
 })
