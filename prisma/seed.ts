@@ -25,14 +25,14 @@ async function main() {
   console.log('Seeding EvaKos database in Supabase...')
 
   // 1. Seed Admin Villa
-  const hashedPassword = await argon2.hash('admin123')
+  const hashedPassword = await argon2.hash('villakos112')
   const admin = await prisma.user.upsert({
-    where: { email: 'villakos112' },
+    where: { email: 'villaalexkos@gmail.com' },
     update: {
       password: hashedPassword,
     },
     create: {
-      email: 'villakos112',
+      email: 'villaalexkos@gmail.com',
       password: hashedPassword,
       name: 'Villa (Pemilik Kos)',
     },

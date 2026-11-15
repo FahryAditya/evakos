@@ -45,19 +45,19 @@ async function runTests() {
   console.log('👉 [TEST 1] Pengujian Autentikasi Admin Villa...')
   try {
     const user = await prisma.user.findUnique({
-      where: { email: 'villakos112' },
+      where: { email: 'villaalexkos@gmail.com' },
     })
 
     if (!user) {
-      throw new Error('User villakos112 tidak ditemukan di database!')
+      throw new Error('User villaalexkos@gmail.com tidak ditemukan di database!')
     }
     console.log('   ✓ User ditemukan:', user.email, '| Name:', user.name)
 
-    const isMatch = await argon2.verify(user.password, 'admin123')
+    const isMatch = await argon2.verify(user.password, 'villakos112')
     if (!isMatch) {
       throw new Error('Verifikasi password Argon2 gagal!')
     }
-    console.log('   ✓ Verifikasi Argon2 password "admin123" BERHASIL!')
+    console.log('   ✓ Verifikasi Argon2 password "villakos112" BERHASIL!')
 
     // Test token session creation & verification
     const token = createSessionToken(user.id)
