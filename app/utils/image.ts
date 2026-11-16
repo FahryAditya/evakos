@@ -13,14 +13,14 @@ export function optimizeImage(url: string | undefined | null, width = 800): stri
     if (url.includes('/image/upload/f_auto') || url.includes('/image/upload/c_')) {
       return url
     }
-    const transform = `f_auto,q_auto,w_${width},c_limit`
+    const transform = `f_auto,q_auto:good,w_${width},c_limit`
     return url.replace('/image/upload/', `/image/upload/${transform}/`)
   }
 
   // Unsplash optimization
   if (url.includes('images.unsplash.com')) {
     const cleanUrl = url.split('?')[0]
-    return `${cleanUrl}?auto=format&fit=crop&q=80&w=${width}`
+    return `${cleanUrl}?auto=format&fit=crop&q=75&w=${width}`
   }
 
   return url

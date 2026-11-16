@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: settingsRes } = await useFetch('/api/public/settings')
+const { data: settingsRes } = await useFetch('/api/public/settings', { key: 'site-settings' })
 const setting = computed(() => settingsRes.value?.data || {
   kosName: 'EvaKos',
   ownerName: 'Villa',
@@ -205,7 +205,7 @@ const getWhatsAppRoomLink = (room: any) => {
               class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-100 cursor-pointer mb-3.5 shadow-inner"
             >
               <img
-                :src="optimizeImage(room.images?.[0]?.url, 720)"
+                :src="optimizeImage(room.images?.[0]?.url, 500)"
                 :alt="`Foto kamar ${room.name}`"
                 loading="lazy"
                 decoding="async"
@@ -331,7 +331,7 @@ const getWhatsAppRoomLink = (room: any) => {
             Setiap kamar dirawat secara berkala untuk menjaga kebersihan dan kenyamanan penghuni. Lingkungan aman dan ramah untuk belajar maupun beristirahat setelah beraktivitas.
           </p>
         </div>
-        <div class="pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-slate-400">
+        <div class="pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-slate-300">
           <span>Akses 24 Jam &bull; Kunci Mandiri</span>
           <span class="text-white font-bold">{{ setting.kosName }}</span>
         </div>
@@ -341,7 +341,7 @@ const getWhatsAppRoomLink = (room: any) => {
       <article class="card-interactive bg-brand-yellow text-brand-dark rounded-3xl sm:rounded-3.5xl p-5 sm:p-8 shadow-card flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-dark/70">Langsung ke Pemilik</span>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-dark">Langsung ke Pemilik</span>
             <Icon name="lucide:badge-percent" class="w-5 h-5 text-brand-dark" />
           </div>
           <h3 class="text-lg sm:text-xl font-extrabold tracking-tight mb-2">Tanpa Biaya Admin &amp; Perantara</h3>

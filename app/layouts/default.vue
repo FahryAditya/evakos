@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: settingsRes } = await useFetch('/api/public/settings')
+const { data: settingsRes } = await useFetch('/api/public/settings', { key: 'site-settings' })
 const setting = computed(() => settingsRes.value?.data || {
   kosName: 'EvaKos',
   ownerName: 'Villa',
