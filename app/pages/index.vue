@@ -205,8 +205,12 @@ const getWhatsAppRoomLink = (room: any) => {
               class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-100 cursor-pointer mb-3.5 shadow-inner"
             >
               <img
-                :src="room.images?.[0]?.url || 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800'"
-                :alt="room.name"
+                :src="optimizeImage(room.images?.[0]?.url, 720)"
+                :alt="`Foto kamar ${room.name}`"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="300"
                 class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-[var(--ease-smooth)]"
               />
 
@@ -276,6 +280,7 @@ const getWhatsAppRoomLink = (room: any) => {
             <a
               v-if="room.status === 'AVAILABLE'"
               :href="getWhatsAppRoomLink(room)"
+              :aria-label="`Tanya ketersediaan kamar ${room.name} via WhatsApp`"
               target="_blank"
               rel="noopener noreferrer"
               class="btn-spring w-full bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark text-xs sm:text-sm font-extrabold py-3 sm:py-2.5 rounded-xl flex items-center justify-center gap-2 shadow-xs min-h-[44px]"
@@ -288,6 +293,7 @@ const getWhatsAppRoomLink = (room: any) => {
             <a
               v-else
               :href="`https://wa.me/${setting.whatsapp}?text=${encodeURIComponent('Halo kak ' + setting.ownerName + ', apakah kamar ' + room.name + ' ada antrian jika nanti kosong?')}`"
+              :aria-label="`Tanyakan antrian sewa kamar ${room.name} via WhatsApp`"
               target="_blank"
               rel="noopener noreferrer"
               class="btn-spring w-full bg-slate-100 hover:bg-slate-200 text-text-muted text-xs font-bold py-3 sm:py-2.5 rounded-xl flex items-center justify-center gap-2 min-h-[44px]"
@@ -299,6 +305,7 @@ const getWhatsAppRoomLink = (room: any) => {
             <!-- Detail link -->
             <NuxtLink
               :to="`/kamar/${room.slug}`"
+              :aria-label="`Lihat detail lengkap ${room.name}`"
               class="block text-center text-xs text-text-muted hover:text-text-main font-semibold py-1 transition-colors group-hover:translate-x-0.5 duration-200"
             >
               Lihat Detail Lengkap &rarr;
@@ -381,7 +388,10 @@ const getWhatsAppRoomLink = (room: any) => {
               <div class="w-full aspect-video rounded-2xl overflow-hidden bg-slate-100 relative shadow-inner">
                 <img
                   :key="activePhotoIndex"
-                  :src="activeModalRoom.images?.[activePhotoIndex]?.url || activeModalRoom.images?.[0]?.url"
+                  :src="optimizeImage(activeModalRoom.images?.[activePhotoIndex]?.url || activeModalRoom.images?.[0]?.url, 1000)"
+                  :alt="`Foto pratinjau ${activeModalRoom.name}`"
+                  loading="lazy"
+                  decoding="async"
                   class="w-full h-full object-cover transition-opacity duration-300"
                 />
               </div>
@@ -397,7 +407,15 @@ const getWhatsAppRoomLink = (room: any) => {
                     activePhotoIndex === Number(idx) ? 'border-brand-yellow scale-105 shadow-md' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-102'
                   ]"
                 >
-                  <img :src="img.url" class="w-full h-full object-cover" />
+                  <img
+                    :src="optimizeImage(img.url, 160)"
+                    :alt="`Thumbnail foto ${idx + 1}`"
+                    loading="lazy"
+                    decoding="async"
+                    width="80"
+                    height="56"
+                    class="w-full h-full object-cover"
+                  />
                 </button>
               </div>
 

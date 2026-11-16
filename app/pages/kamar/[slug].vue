@@ -95,8 +95,11 @@ const waLink = computed(() => {
         <div class="w-full aspect-[4/3] sm:aspect-video rounded-2xl sm:rounded-2.5xl overflow-hidden bg-slate-100 shadow-inner relative group">
           <img
             :key="activePhotoIndex"
-            :src="room.images?.[activePhotoIndex]?.url || room.images?.[0]?.url || 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1200'"
-            :alt="room.name"
+            :src="optimizeImage(room.images?.[activePhotoIndex]?.url || room.images?.[0]?.url, 1080)"
+            :alt="`Foto utama ${room.name}`"
+            decoding="async"
+            width="800"
+            height="500"
             class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-[var(--ease-smooth)]"
           />
         </div>
@@ -107,12 +110,21 @@ const waLink = computed(() => {
             v-for="(img, idx) in room.images"
             :key="img.id || idx"
             @click="activePhotoIndex = Number(idx)"
+            :aria-label="`Pilih foto ke-${idx + 1}`"
             :class="[
               'w-20 sm:w-28 h-14 sm:h-20 rounded-xl sm:rounded-2xl overflow-hidden flex-shrink-0 border-2 transition-all duration-300 ease-[var(--ease-spring)] cursor-pointer',
               activePhotoIndex === Number(idx) ? 'border-brand-yellow scale-105 shadow-md' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-102'
             ]"
           >
-            <img :src="img.url" class="w-full h-full object-cover" />
+            <img
+              :src="optimizeImage(img.url, 200)"
+              :alt="`Thumbnail ${room.name} ${idx + 1}`"
+              loading="lazy"
+              decoding="async"
+              width="112"
+              height="80"
+              class="w-full h-full object-cover"
+            />
           </button>
         </div>
       </div>

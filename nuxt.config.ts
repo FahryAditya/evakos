@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
+      htmlAttrs: {
+        lang: 'id',
+      },
       title: 'EvaKos - Informasi & Sewa Kamar Kos',
       meta: [
         { charset: 'utf-8' },
@@ -17,6 +20,10 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content: 'Pilihan kamar kos nyaman, bersih, fasilitas lengkap, dan langsung terhubung dengan pemilik.',
+        },
+        {
+          name: 'google-site-verification',
+          content: 'googleae0726c51150f2d4',
         },
       ],
       link: [
@@ -35,6 +42,16 @@ export default defineNuxtConfig({
   nitro: {
     externals: {
       traceInclude: ['node_modules/argon2/**'],
+    },
+  },
+  routeRules: {
+    '/**': {
+      headers: {
+        'X-Frame-Options': 'SAMEORIGIN',
+        'X-Content-Type-Options': 'nosniff',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+        'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+      },
     },
   },
   vite: {

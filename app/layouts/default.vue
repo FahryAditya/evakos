@@ -20,7 +20,7 @@ const waLink = computed(() => {
     <header class="sticky top-0 z-40 px-3 sm:px-6 pt-3">
       <div class="max-w-[1360px] mx-auto bg-white/95 backdrop-blur-md border border-slate-200/80 rounded-full px-4 sm:px-6 py-2.5 sm:py-3 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between gap-2">
         <!-- Logo with interactive hover tilt -->
-        <NuxtLink to="/" class="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 group">
+        <NuxtLink to="/" aria-label="Kembali ke halaman utama EvaKos" class="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 group">
           <div class="grid grid-cols-2 gap-1 w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform duration-300 ease-[var(--ease-spring)]">
             <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-brand-yellow rounded-xs"></span>
             <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-brand-dark rounded-xs"></span>
@@ -37,6 +37,7 @@ const waLink = computed(() => {
         <div class="flex items-center gap-2 sm:gap-3">
           <NuxtLink
             to="/admin/login"
+            aria-label="Masuk ke panel admin pemilik kos"
             class="hidden md:inline-flex text-xs font-semibold text-text-muted hover:text-text-main px-3.5 py-2 rounded-full hover:bg-slate-100 transition-all duration-200 active:scale-95"
           >
             Kelola Kos (Admin)
@@ -44,6 +45,7 @@ const waLink = computed(() => {
 
           <a
             :href="waLink"
+            aria-label="Hubungi pemilik kos via WhatsApp"
             target="_blank"
             rel="noopener noreferrer"
             class="btn-spring flex items-center gap-1.5 sm:gap-2 bg-brand-dark hover:bg-brand-dark-hover text-white text-xs font-bold px-4 py-2 sm:py-2.5 rounded-full shadow-sm flex-shrink-0"
